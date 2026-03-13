@@ -1,8 +1,8 @@
 # Claude Design Skills
 
-Three custom skills that turn Claude Code into a UX strategist, visual craftsperson, and creative design director.
+Four custom skills that turn Claude Code into a UX strategist, visual craftsperson, creative design director, and design system engineer.
 
-Built by fusing the best of multiple sources into a cohesive system that covers the full design workflow -- from user psychology to pixel-perfect implementation.
+Built by fusing the best of multiple sources into a cohesive system that covers the full design workflow -- from user psychology to pixel-perfect implementation to design system infrastructure.
 
 ## What's Inside
 
@@ -38,14 +38,39 @@ Turns Claude into a visual perfectionist. 8pt spacing grid, mathematical type sc
 ### `/frontend-design` -- Bold Aesthetic Direction
 For when the interface needs a distinctive, memorable visual identity. Landing pages, portfolios, marketing pages. Chooses intentional aesthetic directions and executes with precision.
 
+### `/design-system` -- Infrastructure & Consistency
+Manages the foundation that makes everything else work: design tokens, component libraries, documentation, audits, and Figma sync. Built for **shadcn/ui + Tailwind CSS + Next.js** projects.
+
+**6 modes:**
+
+| Mode | What it does |
+|------|-------------|
+| **Auditar** | Scans for token drift, hardcoded colors, WCAG violations, spacing off the 8pt grid, dark mode gaps, undocumented components |
+| **Fundacao** | Creates a design system from a screenshot (new project) OR extracts and organizes tokens from an existing codebase |
+| **Componente** | Checks for duplicates, searches shadcn registry, installs, customizes, creates showcase page, updates navigation |
+| **Pagina** | Analyzes a design (screenshot/Figma), maps to existing DS components, builds the page, verifies compliance post-build |
+| **Documentar** | Auto-generates design system documentation (token inventory, component catalog, usage guidelines) |
+| **Sync Figma** | Pulls tokens from Figma, compares parity between Figma and code, generates code from Figma components |
+
+**Reference guides (loaded on-demand):**
+- `foundation-workflow.md` -- complete workflow for creating or extracting a design system foundation
+- `component-workflow.md` -- adding components with duplicate detection and showcase generation
+- `page-workflow.md` -- building pages that import from the design system
+- `audit-checklist.md` -- token drift scanning, WCAG compliance, component consistency checks
+- `shadcn-tailwind-patterns.md` -- patterns for shadcn/ui + Tailwind CSS 3/4, CVA, dark mode, token naming
+
 ## How Skills Work
 
 Skills activate **automatically** -- Claude detects when they're relevant based on your conversation. You can also invoke them manually:
 
 ```
-/ux-designer          # force UX strategy mode
-/ui-designer          # force visual craft mode
-/frontend-design      # force bold aesthetic direction
+/ux-designer                      # force UX strategy mode
+/ui-designer                      # force visual craft mode
+/frontend-design                  # force bold aesthetic direction
+/design-system                    # force design system mode
+/design-system auditar            # run a design system audit
+/design-system fundacao           # create or extract a design system
+/design-system componente button  # add a component to the DS
 ```
 
 Reference files inside each skill load **on-demand**, not all at once. This keeps your context clean while giving Claude access to deep knowledge when needed.
@@ -76,6 +101,7 @@ Start a new Claude Code conversation and check that the skills appear. You can t
 - "Review this dashboard" -- should activate `/ux-designer`
 - "The spacing looks off" -- should activate `/ui-designer`
 - "Create a landing page" -- should activate `/frontend-design`
+- "Audit the design system" -- should activate `/design-system`
 
 ## How They Work Together
 
@@ -86,6 +112,9 @@ User request
 /ux-designer          -- "Who is the user? What's the strategy?"
     |                     ELMR mapping, psychology, flow design
     v
+/design-system        -- "Is the infrastructure ready?"
+    |                     Tokens, components, consistency, docs
+    v
 /ui-designer          -- "Make it look professional and polished"
     |                     8pt grid, tokens, Senior Designer Filter
     v
@@ -93,7 +122,11 @@ User request
                           Bold aesthetic direction (when needed)
 ```
 
-The skills hand off to each other. `/ux-designer` focuses on strategy and psychology, then passes to `/ui-designer` for visual craft. `/frontend-design` adds bold aesthetic direction when the interface needs to stand out (portfolios, landing pages, marketing).
+The skills hand off to each other:
+- `/ux-designer` focuses on strategy and psychology -- who is the user, what's the flow
+- `/design-system` ensures the infrastructure is solid -- tokens defined, components available, everything consistent
+- `/ui-designer` handles visual craft -- spacing, color, typography, polish
+- `/frontend-design` adds bold aesthetic direction when the interface needs to stand out (portfolios, landing pages, marketing)
 
 ## Credits & Sources
 
@@ -104,8 +137,10 @@ This project fuses and extends work from multiple sources:
 - **[Growth.Design](https://growth.design)** -- CLEAR framework (Copy, Layout, Emphasis, Accessibility, Reward)
 - **[Reforge](https://reforge.com)** -- ELMR framework (Emotion, Logic, Motivation, Reward)
 - **[Anthropic](https://github.com/anthropics/skills)** -- Frontend Design skill, skill format specification
+- **[Design System Agent](https://github.com/jarvismoore1016/design-system-agent)** by Jarvis Moore -- inspiration for audit workflows, Figma sync modes, and component generation patterns
+- **[Awesome Design Systems](https://github.com/jcusick93/awesome-design-systems)** -- reference catalog for design system benchmarking
 
-The value here is in the **curation and fusion** -- combining UX strategy, visual craft, psychology, and taste into a unified system that covers the full design workflow.
+The value here is in the **curation and fusion** -- combining UX strategy, visual craft, psychology, design system infrastructure, and taste into a unified system that covers the full design workflow.
 
 ## License
 
