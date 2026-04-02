@@ -213,14 +213,72 @@ library, see [references/patterns-and-flows.md](references/patterns-and-flows.md
 
 ## Step 6: Content Design and Microcopy
 
-Words ARE the interface. Apply these essentials:
+Words ARE the interface. Copy is not decoration — it is how users understand
+what things are, what they can do, and what happens next.
 
-### Core Copy Rules for UX Decisions
+### Core Copy Rules
 - Button labels name the outcome, not the action: "Save Changes" not "Submit"
 - Every error answers: what happened + why + what now
 - Empty states explain why it's empty and what to do about it
 - Confirmation dialogs name both actions specifically, never "Cancel" / "OK"
 - Tone matches emotional state: calm for errors, brief for success
+
+### Terminology Governance
+When a product introduces a named concept (e.g., "Duo", "Workspace", "Board"):
+
+- **Introduce before you use.** The first mention must define the term, even
+  briefly. Never drop a product term cold — the reader's mental model needs
+  an anchor before they can attach meaning to a name.
+- **One concept = one term.** If the product calls it a "Duo", don't also call
+  it an "agent", "assistant", "bot", and "guide" interchangeably. Pick one
+  primary term for marketing/external copy. Synonyms create cognitive load.
+- **Consistent casing.** Decide early: "Duo" (proper noun, warm) vs "DUO"
+  (acronym feel, technical). Apply everywhere. Mixed casing signals that the
+  team hasn't decided — and if the team hasn't, the user certainly won't.
+- **Define in the first screen, reinforce in the second, assume from the
+  third.** Don't explain the same term five times, but don't assume everyone
+  read the hero.
+
+### Copy Hierarchy (Marketing Pages / LPs)
+For landing pages and marketing surfaces, copy follows a persuasion arc:
+
+1. **Hero headline** — outcome the user wants (benefit, not feature). < 10 words.
+2. **Hero description** — HOW that outcome happens + introduce the product
+   name/concept. Connect benefit to mechanism.
+3. **Problem section** — name the pain the user already feels (PAS: Problem,
+   Agitate, Solution). Use "you" language.
+4. **Solution section** — show how the product solves it. Features described
+   as benefits.
+5. **Social proof** — validation that the promise is real (quotes, numbers,
+   logos). Always BEFORE the final CTA, not after.
+6. **CTA** — use the SAME term established in the hero. Never introduce a new
+   concept at the decision moment.
+
+### Copy by Component
+| Component | Rule | Example |
+|-----------|------|---------|
+| **CTA button** | Verb + outcome, 2-4 words | "Start Free Trial", not "Submit" |
+| **Error message** | What happened + what to do | "Email not found. Check spelling or create an account." |
+| **Empty state** | Why empty + what to do + encourage | "No projects yet. Create your first one to get started." |
+| **Tooltip** | One sentence, answer "what is this?" | "Messages sent in the last 30 days." |
+| **Placeholder** | Example of valid input, not label | "e.g., jane@company.com", not "Enter your email" |
+| **Loading** | What's happening, not "please wait" | "Generating your report..." |
+| **Success** | Confirm what happened + next step | "Payment confirmed. You'll receive access in your email." |
+| **Onboarding** | One concept per step, progress visible | "Step 2 of 3: Choose your first template." |
+| **Nav labels** | Noun (destination), not verb | "Settings", not "Configure" |
+| **Confirmation dialog** | Name both actions specifically | "Delete project" / "Keep project", never "OK" / "Cancel" |
+
+### Voice & Tone Consistency
+- **Voice** is WHO you are (consistent always): confident, clear, human.
+- **Tone** is HOW you say it (varies by situation): calm for errors, celebratory
+  for success, encouraging for onboarding, direct for settings.
+- When auditing, check: does every screen sound like the same product? If you
+  read the error page and the success page aloud, do they feel like they come
+  from the same brand?
+
+For the complete copy reference with persuasion frameworks, audit checklists,
+and component patterns, see
+[references/copy-and-content.md](references/copy-and-content.md).
 
 ---
 
@@ -315,11 +373,21 @@ Rate each dimension 1-5 with specific observations.
 
 | Dimension | Score (1-5) | Observation | Recommendation |
 |-----------|------------|-------------|----------------|
-| **C -- Copy** | | Is the text clear, actionable, hierarchical? | |
+| **C -- Copy** | | Clear, actionable, hierarchical? Terms consistent? Concepts introduced before used? Tone matches context? See sub-criteria below. | |
 | **L -- Layout** | | Logical grouping, grid, spacing, balance, rhythm? | |
 | **E -- Emphasis** | | Clear hierarchy, one focal point per section, 6 contrast forms used? | |
 | **A -- Accessibility** | | WCAG contrast, font sizes, touch targets, keyboard, color independence? | |
 | **R -- Reward** | | Feedback on interactions, transitions, success confirmation, delight? | |
+
+**C -- Copy sub-criteria** (check each when auditing):
+- [ ] Product terms used consistently (one concept = one term)?
+- [ ] New terms defined before first use (introduce, then reinforce, then assume)?
+- [ ] Casing consistent across all surfaces (proper noun vs ALL CAPS vs lowercase)?
+- [ ] CTAs use the same vocabulary as the rest of the page (no surprise terms)?
+- [ ] Headlines lead with benefit/outcome, not feature/mechanism?
+- [ ] Tone appropriate per context (calm errors, brief success, encouraging onboarding)?
+- [ ] Microcopy present where needed (tooltips, placeholders, empty states)?
+- [ ] No jargon unless the audience expects it?
 
 **Scoring criteria:**
 - 1: Absent or harmful
