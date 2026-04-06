@@ -1,7 +1,7 @@
 # Page Workflow
 
 Complete workflow for building pages using the design system.
-Read this when the mode is **Pagina**.
+Read this when the mode is **Page**.
 
 ---
 

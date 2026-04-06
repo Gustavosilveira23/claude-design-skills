@@ -1,7 +1,7 @@
 # Audit Checklist
 
 Complete workflow for auditing design system consistency.
-Read this when the mode is **Auditar**.
+Read this when the mode is **Audit**.
 
 ---
 

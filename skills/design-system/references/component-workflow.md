@@ -1,7 +1,7 @@
 # Component Workflow
 
 Complete workflow for adding components to the design system.
-Read this when the mode is **Componente**.
+Read this when the mode is **Component**.
 
 ---
 

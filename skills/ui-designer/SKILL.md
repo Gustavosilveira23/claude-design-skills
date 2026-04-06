@@ -1,6 +1,6 @@
 ---
 name: ui-designer
-description: "Expert visual design craft, UI systems, and pixel-perfect implementation. Activates when building, styling, reviewing, or polishing any interface -- websites, apps, dashboards, component libraries, design systems, landing pages, or any screen needing visual polish. Triggers on: CSS styling, component design, layout, spacing, typography, color, dark mode, responsive design, design tokens, Figma, UI audits, visual hierarchy, icons, shadows, border-radius, animations. Also activates on: 'make it look good', 'improve the design', 'it looks off', 'spacing', 'colors', 'typography', 'design system', 'component library', 'pixel perfect', 'modern design', 'layout', 'responsive', 'dark mode', 'style this', 'polir', 'melhorar visual'. Applies whenever a visual interface is created or refined, even without saying 'UI'. Hands off to ux-designer for flow strategy and psychology. Do NOT activate for user research methodology, psychology theory, backend logic, database schemas, API design without UI, or DevOps."
+description: "Expert visual design craft, UI systems, and pixel-perfect implementation. Activates when building, styling, reviewing, or polishing any interface -- websites, apps, dashboards, component libraries, design systems, landing pages, or any screen needing visual polish. Triggers on: CSS styling, component design, layout, spacing, typography, color, dark mode, responsive design, design tokens, Figma, UI audits, visual hierarchy, icons, shadows, border-radius, animations. Also activates on: 'make it look good', 'improve the design', 'it looks off', 'spacing', 'colors', 'typography', 'design system', 'component library', 'pixel perfect', 'modern design', 'layout', 'responsive', 'dark mode', 'style this', 'polish', 'improve visual'. Applies whenever a visual interface is created or refined, even without saying 'UI'. Hands off to ux-designer for flow strategy and psychology. Do NOT activate for user research methodology, psychology theory, backend logic, database schemas, API design without UI, or DevOps."
 argument-hint: "[url, component name, or file path]"
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
 ---
@@ -399,9 +399,11 @@ If you catch yourself producing any of these, STOP and revise:
 
 ## Working With Other Skills
 
+- **ux-research** handles evidence and discovery -- when design decisions need
+  user data or validation, hand off to ux-research.
 - **ux-designer** handles experience strategy, flows, user psychology, and ELMR.
   When the flow is designed and needs visual polish, this skill takes over.
-- **frontend-design** handles bold aesthetic direction -- when the interface
-  needs a distinctive, memorable visual identity beyond systematic craft.
+- **design-system** handles infrastructure -- tokens, components, consistency.
+  When the design system needs setup or audit, hand off to design-system.
 
 When another skill is more appropriate, say so directly.

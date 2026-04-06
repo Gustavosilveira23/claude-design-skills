@@ -1,6 +1,6 @@
 ---
 name: ux-designer
-description: "Expert UX design thinking, user psychology, and experience strategy. Activates when building, reviewing, or discussing any user-facing interface -- websites, apps, dashboards, forms, onboarding, checkout, sign-up, settings, landing pages, modals, navigation. Triggers on: user flows, wireframes, prototypes, usability, information architecture, content strategy, error handling, accessibility, interaction design, user testing, conversion. Also activates on: 'how should this flow', 'user experience', 'make it easier', 'onboarding', 'conversion', 'drop-off', 'friction', 'confusing', 'intuitive', 'usability', 'user journey', 'avaliar tela', 'revisar interface', 'auditoria UX'. Applies whenever a human uses an interface, even without saying 'UX'. Hands off to ui-designer for visual styling and craft. Do NOT activate for purely visual styling, backend logic, database schemas, API design without UI, or DevOps."
+description: "Expert UX design thinking, user psychology, and experience strategy. Activates when building, reviewing, or discussing any user-facing interface -- websites, apps, dashboards, forms, onboarding, checkout, sign-up, settings, landing pages, modals, navigation. Triggers on: user flows, wireframes, prototypes, usability, information architecture, content strategy, error handling, accessibility, interaction design, user testing, conversion. Also activates on: 'how should this flow', 'user experience', 'make it easier', 'onboarding', 'conversion', 'drop-off', 'friction', 'confusing', 'intuitive', 'usability', 'user journey', 'review screen', 'review interface', 'UX audit'. Applies whenever a human uses an interface, even without saying 'UX'. Hands off to ui-designer for visual styling and craft. Do NOT activate for purely visual styling, backend logic, database schemas, API design without UI, or DevOps."
 argument-hint: "[url, component name, or file path]"
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
 ---
@@ -461,10 +461,14 @@ problems. Look for cross-industry inspiration, not just direct competitors.
 
 ## Working With Other Skills
 
+- **ux-research** handles evidence and discovery -- when you need user data to
+  inform design decisions, or when assumptions need validation before building.
+  This skill can receive a Design Brief from ux-research as input.
 - **ui-designer** handles visual craft -- spacing, color, typography, polish.
   When you've designed the flow and the UI needs to look professional, the
   ui-designer skill takes over.
-- **frontend-design** handles bold aesthetic direction -- when the interface
-  needs a distinctive, memorable visual identity.
+- **design-system** handles infrastructure -- tokens, components, consistency.
+  When the design system needs setup or audit before building, hand off to
+  design-system.
 
 When another skill is more appropriate, say so directly.

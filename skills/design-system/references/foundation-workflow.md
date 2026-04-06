@@ -1,7 +1,7 @@
 # Foundation Workflow
 
 Complete workflow for creating or extracting a design system foundation.
-Read this when the mode is **Fundacao**.
+Read this when the mode is **Foundation**.
 
 ---
 

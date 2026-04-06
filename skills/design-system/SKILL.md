@@ -1,7 +1,7 @@
 ---
 name: design-system
-description: "Design system infrastructure: create, maintain, audit, and document design systems with shadcn/ui + Tailwind CSS 4 + Next.js. Activates when creating design systems, adding components to a design system, auditing token consistency, documenting components, syncing with Figma, or building pages from a design system. Triggers on: 'design system', 'design tokens', 'styleguide', 'criar DS', 'auditar DS', 'token drift', 'sync figma', 'adicionar componente ao DS', 'showcase', 'fundacao', 'documentar DS'. Also activates on: 'shadcn setup', 'globals.css tokens', 'CSS variables', 'criar styleguide', 'verificar consistencia'. Handles the infrastructure layer -- tokens, components, consistency, documentation. Hands off to ui-designer for visual craft and polish. Hands off to ux-designer for experience strategy and psychology. Do NOT activate for purely visual styling decisions, user research, backend logic, or DevOps."
-argument-hint: "[mode: auditar|fundacao|componente|pagina|documentar|sync-figma] [component name, screenshot, or Figma URL]"
+description: "Design system infrastructure: create, maintain, audit, and document design systems with shadcn/ui + Tailwind CSS 4 + Next.js. Activates when creating design systems, adding components to a design system, auditing token consistency, documenting components, syncing with Figma, or building pages from a design system. Triggers on: 'design system', 'design tokens', 'styleguide', 'token drift', 'sync figma', 'showcase', 'audit DS', 'add component'. Also activates on: 'shadcn setup', 'globals.css tokens', 'CSS variables', 'create styleguide', 'check consistency'. Handles the infrastructure layer -- tokens, components, consistency, documentation. Hands off to ui-designer for visual craft and polish. Hands off to ux-designer for experience strategy and psychology. Do NOT activate for purely visual styling decisions, user research, backend logic, or DevOps."
+argument-hint: "[mode: audit|foundation|component|page|document|sync-figma] [component name, screenshot, or Figma URL]"
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
 ---
 
@@ -30,12 +30,12 @@ Read the user's request and determine which mode to operate in. If unclear, ask.
 
 | Mode | Triggers | Reference |
 |------|----------|-----------|
-| **Auditar** | "auditar", "audit", "verificar consistencia", "token drift", "checar DS" | [audit-checklist.md](references/audit-checklist.md) |
-| **Fundacao** | "criar design system", "setup DS", "fundacao", screenshot provided | [foundation-workflow.md](references/foundation-workflow.md) |
-| **Componente** | "adicionar componente", component name, "novo componente" | [component-workflow.md](references/component-workflow.md) |
-| **Pagina** | "criar pagina", "nova pagina", screenshot/Figma URL for a page | [page-workflow.md](references/page-workflow.md) |
-| **Documentar** | "documentar", "gerar docs", "atualizar docs DS" | Step 6 below |
-| **Sync Figma** | "sync figma", "pull tokens", "comparar figma", Figma URL | Step 7 below |
+| **Audit** | "audit", "check consistency", "token drift", "check DS" | [audit-checklist.md](references/audit-checklist.md) |
+| **Foundation** | "create design system", "setup DS", "foundation", screenshot provided | [foundation-workflow.md](references/foundation-workflow.md) |
+| **Component** | "add component", component name, "new component" | [component-workflow.md](references/component-workflow.md) |
+| **Page** | "create page", "new page", screenshot/Figma URL for a page | [page-workflow.md](references/page-workflow.md) |
+| **Document** | "document", "generate docs", "update DS docs" | Step 6 below |
+| **Sync Figma** | "sync figma", "pull tokens", "compare figma", Figma URL | Step 7 below |
 
 Once mode is identified, read the corresponding reference file and follow its
 workflow. The steps below provide the overview; the references have the details.
@@ -65,7 +65,7 @@ Before any action, understand what exists:
 
 ---
 
-## Step 2: Mode -- Auditar
+## Step 2: Mode -- Audit
 
 Read [references/audit-checklist.md](references/audit-checklist.md) for the
 complete audit workflow.
@@ -101,7 +101,7 @@ Healthy patterns (what's working well):
 
 ---
 
-## Step 3: Mode -- Fundacao
+## Step 3: Mode -- Foundation
 
 Read [references/foundation-workflow.md](references/foundation-workflow.md)
 for the complete foundation workflow.
@@ -128,7 +128,7 @@ for the complete foundation workflow.
 
 ---
 
-## Step 4: Mode -- Componente
+## Step 4: Mode -- Component
 
 Read [references/component-workflow.md](references/component-workflow.md)
 for the complete component workflow.
@@ -149,7 +149,7 @@ for the complete component workflow.
 
 ---
 
-## Step 5: Mode -- Pagina
+## Step 5: Mode -- Page
 
 Read [references/page-workflow.md](references/page-workflow.md)
 for the complete page workflow.
@@ -167,7 +167,7 @@ that already exists in the DS, refactor immediately.
 
 ---
 
-## Step 6: Mode -- Documentar
+## Step 6: Mode -- Document
 
 Generate or update design system documentation.
 
@@ -426,13 +426,13 @@ Push back ONCE. If the user insists, implement without further argument.
 
 ## Working With Other Skills
 
+- **ux-research** handles discovery and evidence -- when you need to validate
+  assumptions or understand user needs before building, hand off to ux-research.
+- **ux-designer** handles experience strategy -- when the flow, psychology,
+  or user journey needs design, hand off to ux-designer.
 - **ui-designer** handles visual craft -- when the DS is set up and individual
   components need visual polish, spacing refinement, or aesthetic decisions,
   hand off to ui-designer.
-- **ux-designer** handles experience strategy -- when the flow, psychology,
-  or user journey needs design, hand off to ux-designer.
-- **frontend-design** handles bold aesthetic direction -- when the interface
-  needs a distinctive, memorable identity beyond systematic consistency.
 
 This skill handles the **infrastructure layer**: tokens, components,
 consistency, documentation, and Figma sync. When another skill is more
