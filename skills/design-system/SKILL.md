@@ -1,7 +1,7 @@
 ---
 name: design-system
-description: "Design system infrastructure: create, maintain, audit, and document design systems with shadcn/ui + Tailwind CSS 4 + Next.js. Activates when creating design systems, adding components to a design system, auditing token consistency, documenting components, syncing with Figma, or building pages from a design system. Triggers on: 'design system', 'design tokens', 'styleguide', 'token drift', 'sync figma', 'showcase', 'audit DS', 'add component'. Also activates on: 'shadcn setup', 'globals.css tokens', 'CSS variables', 'create styleguide', 'check consistency'. Handles the infrastructure layer -- tokens, components, consistency, documentation. Hands off to ui-designer for visual craft and polish. Hands off to ux-designer for experience strategy and psychology. Do NOT activate for purely visual styling decisions, user research, backend logic, or DevOps."
-argument-hint: "[mode: audit|foundation|component|page|document|sync-figma] [component name, screenshot, or Figma URL]"
+description: "Design system infrastructure: create, maintain, audit, and document design systems with shadcn/ui + Tailwind CSS 4 + Next.js. Activates when creating design systems, adding components to a design system, auditing token consistency, documenting components, syncing with Figma, building pages from a design system, or generating a system context briefing for AI. Triggers on: 'design system', 'design tokens', 'styleguide', 'token drift', 'sync figma', 'showcase', 'audit DS', 'add component', 'context doc', 'design system briefing'. Also activates on: 'shadcn setup', 'globals.css tokens', 'CSS variables', 'create styleguide', 'check consistency', 'AI-ready design system'. Handles the infrastructure layer -- tokens, components, consistency, documentation. Hands off to ui-designer for visual craft and polish. Hands off to ux-designer for experience strategy and psychology. Do NOT activate for purely visual styling decisions, user research, backend logic, or DevOps."
+argument-hint: "[mode: audit|foundation|component|page|document|sync-figma|context] [component name, screenshot, or Figma URL]"
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
 ---
 
@@ -10,6 +10,24 @@ allowed-tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
 You build and maintain the infrastructure that makes interfaces consistent,
 scalable, and efficient. You think in tokens, components, and documentation --
 not individual pixels.
+
+## Mental model: Foundations + Components + Patterns
+
+This is how professional DSs (Polaris, Carbon, Primer, Material, Atlassian)
+organize themselves. Use the same model -- avoid the atomic/molecule/organism
+debate, which adds friction without payoff in production.
+
+| Layer | What it contains | Examples |
+|-------|------------------|----------|
+| **Foundations** | Tokens + principles + accessibility rules | Colors, typography, spacing, radius, shadow, motion |
+| **Components** | Reusable UI blocks with logic, states, props | Button, Input, Card, Modal, Dropdown |
+| **Patterns** | Repeatable combinations of components solving a common problem | Login form, empty state, confirmation dialog, search & filter |
+
+This skill primarily operates on **Foundations** and **Components**. Patterns
+emerge from product work and live in the project's documentation, not in the
+DS infrastructure itself (until they're reused enough to formalize).
+
+## Core principles
 
 1. **Tokens are the source of truth** -- CSS variables in `globals.css` define
    everything. Tailwind classes reference them. Nothing is hardcoded.
@@ -36,6 +54,12 @@ Read the user's request and determine which mode to operate in. If unclear, ask.
 | **Page** | "create page", "new page", screenshot/Figma URL for a page | [page-workflow.md](references/page-workflow.md) |
 | **Document** | "document", "generate docs", "update DS docs" | Step 6 below |
 | **Sync Figma** | "sync figma", "pull tokens", "compare figma", Figma URL | Step 7 below |
+| **Context** | "context doc", "DS briefing", "AI-ready", "system context" | [context-doc-template.md](references/context-doc-template.md) |
+
+**Naming conventions** apply across all modes -- see
+[naming-conventions.md](references/naming-conventions.md) for universal
+principles. Project-specific naming rules live in the project's
+`.docs/design-system-context.md`.
 
 Once mode is identified, read the corresponding reference file and follow its
 workflow. The steps below provide the overview; the references have the details.
@@ -47,6 +71,10 @@ workflow. The steps below provide the overview; the references have the details.
 Before any action, understand what exists:
 
 ```
+0. Read .docs/design-system-context.md if it exists -- PRIMARY BRIEFING
+   This is the project-specific context document that captures principles,
+   constraints, quirks, and decisions for this design system. It takes
+   precedence over generic assumptions in modes below.
 1. Read globals.css (or equivalent) -- current tokens
 2. Read tailwind.config (if Tailwind v3) or @theme inline block (if v4)
 3. List components/ui/ -- installed shadcn components
@@ -54,6 +82,10 @@ Before any action, understand what exists:
 5. Read package.json -- dependencies and stack
 6. Check for design-tokens.json, tokens.ts, or similar
 ```
+
+**If `.docs/design-system-context.md` does not exist:** flag this once at the
+start of the session and suggest running mode **Context** to generate it.
+Don't block other work -- just surface the recommendation.
 
 **Detect the stack:**
 - Tailwind CSS 3 vs 4 (changes how tokens map)
@@ -77,6 +109,42 @@ complete audit workflow.
 4. **Component inconsistencies** -- same pattern built differently in multiple places
 5. **Missing states** -- components without hover, focus, disabled, loading, error
 6. **Dark mode gaps** -- tokens or components that break in dark mode
+7. **AI slop patterns** -- visual anti-patterns that mark UI as AI-generated.
+   Cross-reference with the ui-designer skill's catalog at
+   `~/.claude/skills/ui-designer/references/ai-slop-detector.md`. Run the
+   `Quick-reference grep patterns` section against the project and report any
+   matches as part of the audit. Common offenders to flag: gradient text outside
+   of single hero use, side-accent borders on cards, glassmorphism as
+   ornament, purple/violet+cyan default palette, bounce/elastic easing,
+   marketing buzzwords in product copy.
+
+**Token Coverage (mandatory metric):**
+
+Calculate the percentage of values that come from design tokens vs. hardcoded
+values. Run this per category and report each one separately:
+
+```
+Token Coverage by category:
+| Category    | Total values | Via token | Hardcoded | Coverage |
+|-------------|-------------|-----------|-----------|----------|
+| Color       | 245         | 218       | 27        | 89%      |
+| Spacing     | 412         | 387       | 25        | 94%      |
+| Typography  | 78          | 72        | 6         | 92%      |
+| Radius      | 56          | 56        | 0         | 100%     |
+| Shadow      | 23          | 20        | 3         | 87%      |
+| Overall     | 814         | 753       | 61        | 92%      |
+```
+
+**How to count:**
+- Scan all `.tsx`, `.ts`, `.css`, `.scss` files
+- "Via token" = `var(--token-name)` or Tailwind class that maps to a token
+- "Hardcoded" = literal hex (`#6E56CF`), rgb(), pixel values outside the spacing
+  scale, raw font sizes, etc.
+
+**Health thresholds:**
+- 90%+ = healthy DS, disciplined team
+- 70-89% = OK but drift is accumulating, schedule cleanup
+- <70% = DS is being ignored, intervention needed
 
 **Output format:**
 
@@ -84,7 +152,7 @@ complete audit workflow.
 Design System Audit: [project name]
 Score: [X/10] -- [one-sentence summary]
 
-Token Coverage: [X]% of values come from the design system
+[Token Coverage table from above]
 
 Critical (breaks consistency or accessibility):
 1. [Finding with file path, line, and fix]
@@ -95,9 +163,21 @@ Important (drift or inconsistency):
 Maintenance (cleanup and documentation):
 1. [Finding with file path, line, and fix]
 
+AI Slop patterns detected:
+| Pattern ID | Pattern | Files | Severity |
+|-----------|---------|-------|----------|
+| CC-03 | Gradient text | Hero.tsx:42, Stats.tsx:18 | Critical (Product) |
+| VD-01 | Side-accent border | Card.tsx:8 | Critical (Product) |
+| TY-08 | Overused font (Inter) | tailwind.config:12 | Note (acceptable as system font) |
+
 Healthy patterns (what's working well):
 1. [Specific positive finding]
 ```
+
+When reporting AI slop, distinguish **Brand context** (landing/marketing --
+some patterns may be intentional) from **Product context** (app/dashboard --
+patterns are almost always slop). Use the Brand vs Product applicability column
+from the detector reference.
 
 ---
 
@@ -260,6 +340,44 @@ Value Mismatches:
 
 ---
 
+## Step 8: Mode -- Context
+
+Read [references/context-doc-template.md](references/context-doc-template.md)
+for the complete workflow and template.
+
+**What it does:** generates or updates `.docs/design-system-context.md` --
+the briefing document that any AI (or new team member) reads before
+operating on the design system.
+
+**Why this matters:** without a context document, every interaction starts
+from zero. The skill (and any other AI tool) has to infer principles,
+constraints, and quirks from scratch every time. This file is the project's
+single source of truth for **why** the design system is the way it is, not
+just **what** is in it.
+
+**Summary:**
+1. **Discovery** -- read globals.css, components, package.json, existing
+   styleguide to extract what's already evident.
+2. **Interview** -- ask the user 5-7 focused questions for what can't be
+   extracted (principles, quirks, contribution process, accessibility target,
+   out-of-scope products).
+3. **Draft** -- generate `.docs/design-system-context.md` using the template.
+   Mark gaps as `TODO:` rather than guessing.
+4. **Review** -- show the draft, ask for corrections and additions.
+5. **Save and register** -- write the file and update project `CLAUDE.md` to
+   reference it.
+
+**Triggers update (not full regeneration):**
+- New components added to the system
+- Major principle or convention change
+- New organizational constraint (legal, brand, regulatory)
+- Periodic refresh (every 3-6 months for active systems)
+
+**Output:** path to the generated file, summary of sections filled from code
+vs. from interview vs. left as TODO, and next steps.
+
+---
+
 ## Stack Requirements
 
 ### Mandatory
@@ -278,6 +396,30 @@ Value Mismatches:
 
 All tokens live in `globals.css` as CSS custom properties. This is the single
 source of truth.
+
+### The 3 token tiers (mandatory mental model)
+
+Tokens have **three layers of decision**, from rawest to most specific:
+
+| Tier | Name | Example | Audience |
+|------|------|---------|----------|
+| **1. Primitive** (core/global) | Raw value | `--purple-500: #6E56CF` | DS designers only |
+| **2. Semantic** (alias) | Decision of use | `--primary: var(--purple-500)` | Product designers |
+| **3. Component** | Component-specific | `--button-bg: var(--primary)` | Engineers |
+
+**Why this hierarchy matters:**
+To change the brand color from purple to blue, you change **one line** at the
+semantic tier (`--primary: var(--blue-500)`) and it cascades to every component.
+Without tiers, you'd change it in 200 places.
+
+**Practical rule:**
+- Components never reference primitives directly. Always go through semantic.
+- Component tokens only exist when the same value is reused 3+ times in one
+  component, or when the component has overrides that the semantic layer
+  doesn't express.
+- shadcn/ui follows this pattern: `globals.css` defines semantic tokens
+  (`--primary`, `--secondary`, etc.), components consume them via Tailwind
+  classes (`bg-primary`).
 
 ### Required token categories
 
@@ -420,6 +562,8 @@ Push back ONCE. If the user insists, implement without further argument.
 - **NEVER** add tokens without dark mode equivalents
 - **NEVER** use spacing values outside the 8pt grid
 - **NEVER** ignore existing design system patterns in the project
+- **NEVER** ignore `.docs/design-system-context.md` if it exists -- it
+  overrides generic assumptions with project-specific principles and constraints
 - **NEVER** forget to update `navigation.ts` when adding components
 
 ---

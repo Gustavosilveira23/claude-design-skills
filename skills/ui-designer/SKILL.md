@@ -1,6 +1,6 @@
 ---
 name: ui-designer
-description: "Expert visual design craft, UI systems, and pixel-perfect implementation. Activates when building, styling, reviewing, or polishing any interface -- websites, apps, dashboards, component libraries, design systems, landing pages, or any screen needing visual polish. Triggers on: CSS styling, component design, layout, spacing, typography, color, dark mode, responsive design, design tokens, Figma, UI audits, visual hierarchy, icons, shadows, border-radius, animations. Also activates on: 'make it look good', 'improve the design', 'it looks off', 'spacing', 'colors', 'typography', 'design system', 'component library', 'pixel perfect', 'modern design', 'layout', 'responsive', 'dark mode', 'style this', 'polish', 'improve visual'. Applies whenever a visual interface is created or refined, even without saying 'UI'. Hands off to ux-designer for flow strategy and psychology. Do NOT activate for user research methodology, psychology theory, backend logic, database schemas, API design without UI, or DevOps."
+description: "Expert visual design craft, UI systems, and pixel-perfect implementation. Activates when building, styling, reviewing, or polishing any interface -- websites, apps, dashboards, component libraries, design systems, landing pages, or any screen needing visual polish. Triggers on: CSS styling, component design, layout, spacing, typography, color, dark mode, responsive design, design tokens, Figma, UI audits, visual hierarchy, icons, shadows, border-radius, animations. Also activates on: 'make it look good', 'improve the design', 'it looks off', 'spacing', 'colors', 'typography', 'design system', 'component library', 'pixel perfect', 'modern design', 'layout', 'responsive', 'dark mode', 'style this', 'polish', 'improve visual'. Applies whenever a visual interface is created or refined, even without saying 'UI'. Hands off to ux-designer for flow strategy and psychology. Hands off to design-system for tokens, component infrastructure, and DS audits. Do NOT activate for: user research methodology, psychology theory, backend logic, database schemas, API design without UI, DevOps, casual mention of design vocabulary in a non-design context (e.g., planning, discussing, writing about design without building/styling), tasks where the actual problem is data, performance, infrastructure, or content even if a UI is involved. Require explicit visual/styling intent -- do not activate by reflex on trigger words alone."
 argument-hint: "[url, component name, or file path]"
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
 ---
@@ -23,7 +23,36 @@ first, then proceed through the steps below.
 
 ---
 
-## Step 0: Read the Project First (MANDATORY)
+## Step 0: Detect Context Mode (MANDATORY)
+
+Before any visual decision, identify which context you're working in. Brand and
+Product have different tolerances for ornament, type personality, and motion.
+Mismatching context is the #1 cause of "looks off" UI.
+
+| Mode | Definition | Defaults |
+|------|-----------|----------|
+| **Brand** | Landing pages, marketing sites, portfolio, one-off campaigns. Goal: impression, conversion, story. | Ornament allowed if intentional. Type can be expressive. Motion can be dramatic. Layouts can be asymmetric. |
+| **Product** | Apps, dashboards, tools used repeatedly, internal systems, SaaS. Goal: clarity, speed, trust over time. | Restraint is the default. Type is utility-first. Motion is subtle. Layouts are grid-systematic. |
+
+**Detection signals:**
+- URL/path: `marketing/`, `landing/`, `app/(marketing)/` -> Brand. `app/(dashboard)/`,
+  `app/admin/`, `app/settings/` -> Product.
+- Component context: hero, CTA, testimonial section, footer -> Brand. Tables,
+  forms with 5+ fields, settings panels, navigation -> Product.
+- User request language: "landing page", "marketing", "homepage", "portfolio"
+  -> Brand. "dashboard", "settings", "app", "feature inside the product"
+  -> Product.
+
+**If ambiguous, ask once:** "Is this Brand (one-off, marketing) or Product
+(used repeatedly)? It changes how much ornament is appropriate."
+
+**Why this matters:** a gradient hero headline is OK in Brand (used once,
+makes an impression). The same gradient on a dashboard metric is AI slop
+(undermines trust, hurts scannability). Same technique, opposite verdict.
+
+---
+
+## Step 0.5: Read the Project First (MANDATORY)
 
 Before generating any UI, read the project's existing patterns:
 
@@ -37,7 +66,8 @@ Before generating any UI, read the project's existing patterns:
 - **Never produce template output.** Before finalizing any component, ask: "Does
   this look like it belongs to THIS project, or does it look like every other
   AI-generated app?" If the latter, make one deliberate change that gives it
-  character.
+  character. Run the [AI Slop Detector](references/ai-slop-detector.md) mentally
+  against your output -- if any pattern matches, revise before showing.
 
 ---
 
@@ -320,6 +350,24 @@ showing anything to the user. Do not skip this step.
 - [ ] Responsive behavior tested at all breakpoints?
 - [ ] Touch targets at least 44x44px?
 - [ ] Color contrast passes WCAG AA (4.5:1 text, 3:1 large)?
+
+### AI Slop Detector (mandatory)
+
+Before presenting any UI, scan against the catalog of AI-generated visual
+anti-patterns in [references/ai-slop-detector.md](references/ai-slop-detector.md).
+
+**Quick check -- the 8 most common slop patterns:**
+- [ ] No side-tab accent borders on cards (VD-01)
+- [ ] No glassmorphism used as ornament (VD-03)
+- [ ] No gradient text outside of single hero use (CC-03)
+- [ ] No purple/violet + cyan default palette unless brand-justified (CC-01)
+- [ ] No identical icon-card grids (LS-01, TY-02)
+- [ ] No bounce/elastic easing on UI elements (MO-01)
+- [ ] No marketing buzzwords in copy (CO-02)
+- [ ] No layout property animations -- only transform/opacity (MO-02)
+
+If any match in Product context, revise. In Brand context, confirm the choice
+is intentional and not reflexive.
 
 ### Audit Format (for existing interfaces)
 

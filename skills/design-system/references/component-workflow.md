@@ -173,13 +173,25 @@ Create `/app/styleguide/components/[component-name]/page.tsx` with:
 
 ### Required sections
 
-1. **Title and description** -- what the component is and when to use it
-2. **All variants** -- every visual variation side by side
-3. **All sizes** -- if the component has size variants
-4. **All states** -- default, hover, focus, disabled, loading, error
-5. **Dark mode preview** -- toggle to see dark mode rendering
-6. **Composition examples** -- component used with other components
-7. **Code examples** -- import statement and basic usage
+1. **Title and description** -- what the component is
+2. **Why this exists** -- the problem it solves and the decision behind it
+3. **When to use / When not to use** -- explicit do's and don'ts
+4. **All variants** -- every visual variation side by side
+5. **All sizes** -- if the component has size variants
+6. **All states** -- default, hover, focus, disabled, loading, error
+7. **Dark mode preview** -- toggle to see dark mode rendering
+8. **Composition examples** -- component used with other components
+9. **Accessibility notes** -- ARIA, keyboard nav, contrast considerations
+10. **Code examples** -- import statement and basic usage
+
+### Why document the decision, not just the spec
+
+A component spec (props, variants, sizes) tells AI and humans **what** the
+component is. The decision context tells them **why** it exists -- which is
+what they need to extend, audit, or choose between alternatives correctly.
+
+Without the why, AI hallucinates reasoning. With it, AI extends the system
+in a way that's consistent with the original intent.
 
 ### Showcase structure
 
@@ -189,8 +201,38 @@ export default function ComponentShowcase() {
     <div className="p-8 space-y-12">
       <div>
         <h1 className="text-3xl font-bold mb-2">Component Name</h1>
-        <p className="text-muted-foreground">Brief description and when to use.</p>
+        <p className="text-muted-foreground">Brief description.</p>
       </div>
+
+      {/* Why this exists */}
+      <section className="space-y-2">
+        <h2 className="text-xl font-semibold">Why this exists</h2>
+        <p className="text-muted-foreground">
+          [The problem this component solves. The decision behind it.
+          What alternative was considered and why this won.]
+        </p>
+      </section>
+
+      {/* When to use / not to use */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">Usage guidelines</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <h3 className="font-medium text-success">Use this when</h3>
+            <ul className="list-disc list-inside text-muted-foreground space-y-1">
+              <li>[Specific situation 1]</li>
+              <li>[Specific situation 2]</li>
+            </ul>
+          </div>
+          <div className="space-y-2">
+            <h3 className="font-medium text-destructive">Don't use this when</h3>
+            <ul className="list-disc list-inside text-muted-foreground space-y-1">
+              <li>[Specific situation -- and what to use instead]</li>
+              <li>[Specific situation -- and what to use instead]</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
       {/* Variants */}
       <section className="space-y-4">
@@ -216,6 +258,16 @@ export default function ComponentShowcase() {
         </div>
       </section>
 
+      {/* Accessibility */}
+      <section className="space-y-2">
+        <h2 className="text-xl font-semibold">Accessibility</h2>
+        <ul className="list-disc list-inside text-muted-foreground space-y-1">
+          <li>[ARIA roles or attributes used]</li>
+          <li>[Keyboard interactions supported]</li>
+          <li>[Contrast and visual considerations]</li>
+        </ul>
+      </section>
+
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">Usage</h2>
@@ -229,6 +281,21 @@ export default function ComponentShowcase() {
   )
 }
 ```
+
+### Guidance for filling "Why this exists" and "Usage guidelines"
+
+When creating a new component, ask the user (or infer from context) BEFORE
+building:
+
+1. **What problem does this solve?** -- not "renders a card" but "users need
+   to scan multiple summary entities at a glance".
+2. **What was the alternative?** -- "we considered using a table; chose card
+   because the data is non-tabular".
+3. **When does this NOT apply?** -- "for tabular data with > 5 columns, use
+   DataTable instead".
+
+If the user cannot articulate this, the component may not be needed yet --
+push back before adding it to the system.
 
 ---
 
@@ -259,11 +326,16 @@ Before reporting completion:
 - [ ] Dark mode renders properly
 - [ ] Accessibility: proper ARIA, keyboard nav, contrast
 - [ ] Showcase page created with all sections
+- [ ] **"Why this exists" section is filled** (not generic boilerplate)
+- [ ] **"Use this when" / "Don't use this when" sections have specific scenarios**
+- [ ] **Accessibility notes documented** (ARIA, keyboard, contrast considerations)
 - [ ] Navigation updated
 - [ ] No duplicate components in the project
 - [ ] Uses `cn()` for class merging
 - [ ] Extends shadcn (not rebuilt from scratch)
 - [ ] Props interface exported for TypeScript consumers
+- [ ] Component name follows project naming conventions (check
+      [naming-conventions.md](naming-conventions.md))
 
 ---
 
