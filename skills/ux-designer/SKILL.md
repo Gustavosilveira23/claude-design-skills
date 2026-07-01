@@ -276,8 +276,20 @@ For landing pages and marketing surfaces, copy follows a persuasion arc:
   read the error page and the success page aloud, do they feel like they come
   from the same brand?
 
+### Avoid AI Language Tells
+
+AI-generated copy reads abstract, uniform, and hedge-y. Human copy reads
+concrete, specific, and varied in rhythm. When writing or auditing any copy,
+strip the tells: em-dash used as a rhythm crutch, "not X, but Y" reframes,
+buzzwords (delve, unlock, elevate, seamless, robust / transforme, potencialize,
+revolucione), hedging ("aims to", "busca", "feito para"), generic rule-of-three
+lists, and sentences that are all the same length. The fix is almost always:
+replace an abstraction with a fact/number/concrete noun, cut the crutch, and
+vary sentence length. Preserve official brand taglines, verbatim testimonial
+quotes, and real product/proper names.
+
 For the complete copy reference with persuasion frameworks, audit checklists,
-and component patterns, see
+AI language tells (EN/PT-BR/ES word lists), and component patterns, see
 [references/copy-and-content.md](references/copy-and-content.md).
 
 ---
@@ -388,6 +400,7 @@ Rate each dimension 1-5 with specific observations.
 - [ ] Tone appropriate per context (calm errors, brief success, encouraging onboarding)?
 - [ ] Microcopy present where needed (tooltips, placeholders, empty states)?
 - [ ] No jargon unless the audience expects it?
+- [ ] Free of AI language tells (rhythm em-dash, "not X, but Y", buzzwords, hedging, generic rule-of-three, uniform sentence length)?
 
 **Scoring criteria:**
 - 1: Absent or harmful

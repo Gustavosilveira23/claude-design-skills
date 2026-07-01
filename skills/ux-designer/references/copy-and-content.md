@@ -249,3 +249,64 @@ Body:        What to do — "Create your first project to get started."
 CTA:         Action button — "Create Project"
 Illustration: Optional, but helps set tone (welcoming, not broken)
 ```
+
+---
+
+## 8. AI Language Tells (De-AI Any Copy)
+
+AI writes **abstract, uniform, and hedge-y**. Humans write **concrete, specific,
+with varied rhythm**. Run this after generating or editing any copy — LP, post,
+bio, email, or UI writing. The fix is almost always the same: swap an abstraction
+for a fact/number/concrete noun, cut the crutch, vary sentence length.
+
+Full source guide (structural tells + EN/PT-BR/ES word lists + fast checklist):
+`Mind/3-Recursos/vicios-linguagem-ia-copy.md` in Gustavo's vault.
+
+### Structural Tells (language-agnostic)
+
+| Tell | Example | Fix |
+|------|---------|-----|
+| Em-dash as rhythm crutch | "The platform — built for X — does Y" | Period or comma; rewrite |
+| Contrast reframe "not X, but Y" / "não é X, é Y" | "Not a library, it's transformation" | Max 1× per page; prefer a direct claim |
+| Rule of three (3 adjectives posing as complete) | "fast, simple, and powerful" | Cut to 1-2 specifics, or give numbers |
+| Avoiding "is/are" (serves as, acts as, represents) | "X serves as a layer of..." | "X is..." — direct |
+| Hedging ("aims to", "busca", "feito para", "can help") | "that aims to help" | Assert it: "that helps" |
+| Elegant variation (new synonym every sentence) | course → content → material → journey | Repeat the right word; clarity > variety |
+| Inflated importance ("pivotal", "revolutionary", "game-changer") | "a revolutionary change" | Cut the superlative; show the result |
+| Uniform sentences (all same length, mechanical) | 3 medium sentences in a row | Alternate short + long; a 3-word sentence lands |
+| Auto openers | "Additionally", "Moreover", "Imagine a world where…" | Start with the concrete idea |
+
+### Word Lists
+
+- **EN buzzwords:** delve, unlock, elevate, seamless, robust, leverage,
+  supercharge, empower, transform (your X into Y), tapestry, landscape,
+  testament, boasts, intricate, vibrant, cutting-edge, revolutionize,
+  "in today's fast-paced world", "it's not just X, it's Y", "take it to the
+  next level". → Prefer concrete verbs (build, run, keep, see, answer), numbers,
+  the real name of the thing.
+- **PT-BR:** verbos-clichê (transforme, descomplique, eleve, impulsione,
+  potencialize, revolucione, desbloqueie, alavanque, maximize); adjetivos-balde
+  (incrível, poderoso, inovador, revolucionário, único, completo, robusto,
+  intuitivo); substantivos vazios (jornada, solução, ecossistema, universo,
+  potencial, experiência); conectores-muleta ("Além disso,", "Vale ressaltar,",
+  "No mundo de hoje,"). → Dizer o que a coisa faz com um fato.
+- **ES:** verbos-cliché (transforma, impulsa, potencia, eleva, desbloquea,
+  revoluciona, descubre el poder de); adjetivos-balde (increíble, poderoso,
+  innovador, revolucionario); conectores en exceso ("Además,", "Cabe destacar,",
+  "En el mundo actual,"). → Afirmar con un dato.
+
+### Fast Checklist
+
+1. Rhythm em-dash? → remove/rewrite.
+2. "not X, but Y" / "não é X, é Y"? → max 1×.
+3. Buzzword from the list? → swap for a concrete verb/fact.
+4. Hedge ("busca", "aims to", "feito para")? → assert directly.
+5. Generic rule-of-three? → cut, or add a number.
+6. Any abstraction that could be a number/real name? → swap it.
+7. All sentences the same length? → vary the rhythm.
+
+### Always Preserve
+
+- Official brand taglines (even if they're marketing parallelism).
+- Verbatim testimonial quotes (never edit).
+- Real product terms and proper names.
