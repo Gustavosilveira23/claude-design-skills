@@ -196,6 +196,7 @@ This project fuses and extends work from multiple sources:
 - **[Anthropic](https://github.com/anthropics/skills)** -- skill format specification
 - **[Design System Agent](https://github.com/jarvismoore1016/design-system-agent)** by Jarvis Moore -- inspiration for audit workflows, Figma sync modes, and component generation patterns
 - **[Awesome Design Systems](https://github.com/jcusick93/awesome-design-systems)** -- reference catalog for design system benchmarking
+- **[The Book of Shaders](https://github.com/patriciogonzalezvivo/thebookofshaders)** by Patricio Gonzalez Vivo & Jen Lowe ([thebookofshaders.com](https://thebookofshaders.com)) -- shader concept vocabulary and chapter map behind the `/creative-coding` shaders reference (fragment-shader mental model, shaping functions, the noise/fBm/cellular family, image effects, SDF/ray marching)
 
 The value here is in the **curation and fusion** -- combining UX research, strategy, visual craft, psychology, design system infrastructure, and taste into a unified system that covers the full design workflow.
 
