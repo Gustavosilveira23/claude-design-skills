@@ -1,6 +1,6 @@
 # Claude Design Skills
 
-Four custom skills that turn Claude Code into a UX researcher, UX strategist, visual craftsperson, and design system engineer.
+Five custom skills that turn Claude Code into a UX researcher, UX strategist, visual craftsperson, design system engineer, and motion / creative-coding specialist.
 
 Built by fusing the best of multiple sources into a cohesive system that covers the full design workflow -- from user research to pixel-perfect implementation to design system infrastructure.
 
@@ -80,6 +80,20 @@ Manages the foundation that makes everything else work: design tokens, component
 - `audit-checklist.md` -- token drift scanning, WCAG compliance, component consistency checks
 - `shadcn-tailwind-patterns.md` -- patterns for shadcn/ui + Tailwind CSS 3/4, CVA, dark mode, token naming
 
+### `/creative-coding` -- Motion & Creative Coding
+The layer beyond static UI: scroll-driven animation, WebGL/canvas, generative and interactive effects, and the craft of movement itself. Built for a designer who guides with intent and taste while Claude implements -- climbing from CSS to Canvas to WebGL only when the scene earns it.
+
+**Includes:**
+- The three tiers of effort (DOM/CSS/Framer -> Canvas 2D -> WebGL/shaders) with a "climb only when it pays" rule
+- The vibe-coding loop: build isolated on a `/lab` route, iterate in the browser, integrate only when approved
+- Prompt anatomy for visual effects (intent, reference, parameters, constraints, placement) + a tuning vocabulary
+- Guardrails baked in: ssr:false, pause offscreen, prefers-reduced-motion, capped dpr, and hover-is-not-touch
+
+**Reference guides (loaded on-demand):**
+- `toolkit.md` -- the stack by objective (GSAP, Lenis, react-three-fiber, drei, postprocessing), the tiers in detail, the Processing->web map, and designer shortcuts (Rive, Spline, Lottie)
+- `recipes.md` -- five ready-to-adapt recipes (smooth scroll, scroll reveals, evolving a point field, liquid image hover, floating 3D object) with starter prompts and an order to tackle them
+- `motion-craft.md` -- the 12 animation principles, easing as craft, choreography, and the reusable fundamentals (lerp/damping, noise, the minimal math, the 16ms budget, motion ethics)
+
 ## How Skills Work
 
 Skills activate **automatically** -- Claude detects when they're relevant based on your conversation. You can also invoke them manually:
@@ -94,6 +108,8 @@ Skills activate **automatically** -- Claude detects when they're relevant based 
 /design-system audit              # run a design system audit
 /design-system foundation         # create or extract a design system
 /design-system component button   # add a component to the DS
+/creative-coding                  # force motion / creative-coding mode
+/creative-coding <ref-url>        # start from a reference site
 ```
 
 Reference files inside each skill load **on-demand**, not all at once. This keeps your context clean while giving Claude access to deep knowledge when needed.
@@ -129,6 +145,7 @@ Start a new Claude Code conversation and check that the skills appear. You can t
 - "Review this dashboard" -- should activate `/ux-designer`
 - "The spacing looks off" -- should activate `/ui-designer`
 - "Audit the design system" -- should activate `/design-system`
+- "Add a smooth scroll and animate the hero" -- should activate `/creative-coding`
 
 ## How They Work Together
 
@@ -146,7 +163,10 @@ User request
     |                     Tokens, components, consistency, docs
     v
 /ui-designer          -- "Make it look professional and polished"
-                          8pt grid, tokens, Senior Designer Filter
+    |                     8pt grid, tokens, Senior Designer Filter
+    v
+/creative-coding      -- "Make it move and feel alive"
+                          Scroll animation, WebGL/canvas, motion craft
 ```
 
 The skills hand off to each other:
@@ -154,11 +174,13 @@ The skills hand off to each other:
 - `/ux-designer` focuses on strategy and psychology -- who is the user, what's the flow, how does it feel
 - `/design-system` ensures the infrastructure is solid -- tokens defined, components available, everything consistent
 - `/ui-designer` handles visual craft -- spacing, color, typography, polish
+- `/creative-coding` handles motion & interactive graphics -- scroll animation, WebGL/canvas, generative effects (micro-motion stays with `/ui-designer`)
 
 **You don't need to run the full pipeline every time.** Each skill works independently. Use what you need:
 - Quick visual fix? Go straight to `/ui-designer`
 - Adding a component? Go straight to `/design-system component`
 - Need to validate an assumption? Use `/ux-research plan`
+- Want a scroll animation or a WebGL hero? Go straight to `/creative-coding`
 
 ## Credits & Sources
 
