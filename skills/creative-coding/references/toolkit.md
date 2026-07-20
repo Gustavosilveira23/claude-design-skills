@@ -22,7 +22,8 @@ ceiling: a few thousand moving particles already tax a phone.
 GPU compute. The "impossible" effects: liquid image distortion on hover, millions
 of particles, 3D scenes, a drivable car (bruno-simon.com). Most expensive tier --
 bigger bundle, extra mobile care, and GLSL shaders are almost a second language.
-Worth it for one or two hero moments, rarely the whole site.
+Worth it for one or two hero moments, rarely the whole site. To direct and tune
+shader looks without writing GLSL, see [shaders.md](shaders.md).
 
 ---
 

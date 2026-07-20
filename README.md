@@ -91,6 +91,7 @@ The layer beyond static UI: scroll-driven animation, WebGL/canvas, generative an
 
 **Reference guides (loaded on-demand):**
 - `toolkit.md` -- the stack by objective (GSAP, Lenis, react-three-fiber, drei, postprocessing), the tiers in detail, the Processing->web map, and designer shortcuts (Rive, Spline, Lottie)
+- `shaders.md` -- directing GPU/shader effects without writing GLSL: the per-pixel mental model, the concept toolkit (shaping functions, the noise/fBm/cellular family, image displacement, SDF/ray marching), a shader tuning vocabulary, and a Book of Shaders chapter map
 - `recipes.md` -- five ready-to-adapt recipes (smooth scroll, scroll reveals, evolving a point field, liquid image hover, floating 3D object) with starter prompts and an order to tackle them
 - `motion-craft.md` -- the 12 animation principles, easing as craft, choreography, and the reusable fundamentals (lerp/damping, noise, the minimal math, the 16ms budget, motion ethics)
 

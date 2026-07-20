@@ -49,6 +49,11 @@ For the full stack (GSAP, Lenis, react-three-fiber, drei, postprocessing), what
 NOT to start with, the Processing->web vocabulary map, and designer shortcuts
 (Rive, Spline, Lottie), see [references/toolkit.md](references/toolkit.md).
 
+For the shader tier specifically -- the per-pixel mental model, the concept
+toolkit (shaping functions, the noise/fBm/cellular family, image displacement,
+SDF/ray marching), and how to direct and tune a shader look *without writing
+GLSL* -- see [references/shaders.md](references/shaders.md).
+
 ---
 
 ## Step 1: The vibe-coding loop
@@ -89,6 +94,10 @@ Name the sensation precisely; translate it to code:
 - **Color:** more contrast / pull toward the background tone / glow only at center
 - **Visual weight:** more discreet / more of a protagonist / must not compete
   with the text
+
+For shader-tier effects (distortion, generative textures, SDF), there is a
+matching concept toolkit and tuning vocabulary in
+[references/shaders.md](references/shaders.md).
 
 For the ready-to-adapt recipes (smooth scroll, scroll reveals, evolving a point
 field, hover image distortion, floating 3D object) with starter prompts and the
