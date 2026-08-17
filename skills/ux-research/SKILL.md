@@ -538,6 +538,33 @@ Don't just execute. Advocate for honest inquiry.
 - **design-system** may trigger research needs -- a DS audit might reveal
   patterns that need user validation.
 - **ui-designer** handles visual craft -- not this skill's domain.
+The two handoffs below point to companion tools that are **not** part of this
+repo -- they live in Gustavo's personal setup (`Mind/3-Recursos/agentes/` for MD
+agents, `~/.claude/skills/` for local skills). They are documented here so the
+boundaries stay explicit; adapt or ignore them if you installed these skills
+standalone.
+
+- **growth-engagement agent** (`Mind/3-Recursos/agentes/growth-engagement.md` in
+  Gustavo's vault) consumes use-case evidence (Problem / Alternatives / Why /
+  Frequency). When findings reveal usage frequency, alternatives, or motivation
+  data, offer a Use Case Map handoff to it.
+- **pensamento-estrategico** (local skill in Gustavo's setup) handles the
+  reasoning layer around the decision itself: structuring a vague problem,
+  finding where a metric moved (Pareto, root cause), choosing between paths, and
+  auditing a proposal before it ships. Two directions:
+  - **Send to it** when the "decision" you were handed is not a decision yet, or
+    when a finding is real but nobody has decided what to do with it. It also
+    handles the case where no new evidence is available: it derives hypotheses
+    from first principles instead.
+  - **Receive from it** when a hypothesis it derived needs actual evidence --
+    those become research questions here. Structured reasoning is not a
+    substitute for talking to users; when it hits the limit of what logic can
+    settle, this skill takes over.
+
+  Boundary: it never replaces evidence gathering, and this skill never replaces
+  problem structuring. If someone wants research to answer "why did the metric
+  drop", check first whether the metric was even decomposed -- often the answer
+  is arithmetic, not attitudinal.
 
 This skill handles the **evidence layer**: planning research, generating
 instruments, synthesizing findings, and producing specs. When another skill
