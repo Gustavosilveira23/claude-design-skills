@@ -1,6 +1,6 @@
 # Claude Design Skills
 
-Five custom skills that turn Claude Code into a UX researcher, UX strategist, visual craftsperson, design system engineer, and motion / creative-coding specialist.
+Six custom skills that turn Claude Code into a UX researcher, UX strategist, visual craftsperson, design system engineer, motion / creative-coding specialist, and Figma layout craftsperson.
 
 Built by fusing the best of multiple sources into a cohesive system that covers the full design workflow -- from user research to pixel-perfect implementation to design system infrastructure.
 
@@ -95,6 +95,26 @@ The layer beyond static UI: scroll-driven animation, WebGL/canvas, generative an
 - `recipes.md` -- five ready-to-adapt recipes (smooth scroll, scroll reveals, evolving a point field, liquid image hover, floating 3D object) with starter prompts and an order to tackle them
 - `motion-craft.md` -- the 12 animation principles, easing as craft, choreography, and the reusable fundamentals (lerp/damping, noise, the minimal math, the 16ms budget, motion ethics)
 
+### `/figma-craft` -- Layout Craft Inside Figma
+
+Covers the layer the official Figma skills leave out: **writing** to a Figma file through the MCP
+without the auto layout falling apart. Activates on any create/edit/fix task inside a Figma file --
+screen, frame, card, component, variant, topbar, sidebar, table, FigJam.
+
+**What it adds:**
+- Decide the frame tree **before** generating code, not after the layout breaks
+- Pick HUG / FILL / FIXED by the element's role, because the Figma default is usually the wrong one
+- **Validate by property, never by screenshot** -- `node.screenshot()` renders the node in
+  isolation and hides broken layout
+- A list of gotchas verified on real client work, not theory
+
+**Reference guide (loaded on-demand):**
+- `audit-layout.md` -- runnable audit script that walks the tree and reports sizing, spacing and
+  overflow problems by property
+
+Pairs with the official Figma MCP skills (`figma-use` is a prerequisite). Does **not** cover
+design-to-code -- for reading a Figma file and implementing it in React, use Figma's own skill.
+
 ## How Skills Work
 
 Skills activate **automatically** -- Claude detects when they're relevant based on your conversation. You can also invoke them manually:
@@ -121,22 +141,39 @@ For bold aesthetic direction (landing pages, portfolios, marketing pages), use t
 
 ## Install
 
-### Option 1: Copy to global skills (works in all projects)
+### Option 1: skills CLI (recommended)
+
+Installs versioned, and `skills update` pulls later changes -- no manual copy to drift out of sync.
+Works with Claude Code, Cursor, Codex and ~70 other agents.
 
 ```bash
-# Clone the repo
+# All six skills, global (user-level)
+npx skills add Gustavosilveira23/claude-design-skills --all -g
+
+# Or pick the ones you want
+npx skills add Gustavosilveira23/claude-design-skills -s ui-designer -s ux-designer -g
+
+# See what's available first
+npx skills add Gustavosilveira23/claude-design-skills --list
+```
+
+Later: `npx skills update -g` to pull changes, `npx skills list -g` to see what is installed.
+
+### Option 2: Copy manually
+
+```bash
 git clone https://github.com/Gustavosilveira23/claude-design-skills.git
 
-# Copy skills to Claude Code's global skills directory
+# Global (all projects)
 cp -r claude-design-skills/skills/* ~/.claude/skills/
-```
 
-### Option 2: Copy to a specific project
-
-```bash
-# Copy to your project's .claude directory
+# Or a single project
 cp -r claude-design-skills/skills/* your-project/.claude/skills/
 ```
+
+If you copy manually, the copies drift the moment you edit one side. Diff them with
+`diff -r --strip-trailing-cr` -- plain `diff` reports every line as changed when the line endings
+differ, which hides the real change.
 
 ### Verify
 
@@ -147,6 +184,7 @@ Start a new Claude Code conversation and check that the skills appear. You can t
 - "The spacing looks off" -- should activate `/ui-designer`
 - "Audit the design system" -- should activate `/design-system`
 - "Add a smooth scroll and animate the hero" -- should activate `/creative-coding`
+- "Fix the auto layout in this Figma frame" -- should activate `/figma-craft`
 
 ## How They Work Together
 

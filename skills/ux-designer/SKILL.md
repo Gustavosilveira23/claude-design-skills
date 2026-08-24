@@ -484,4 +484,16 @@ problems. Look for cross-industry inspiration, not just direct competitors.
   When the design system needs setup or audit before building, hand off to
   design-system.
 
+The handoff below points to a companion tool that is **not** part of this repo --
+it lives in Gustavo's personal setup (`Mind/3-Recursos/agentes/` for MD agents).
+It is documented here so the boundary stays explicit; adapt or ignore it if you
+installed these skills standalone.
+
+- **growth-engagement agent** (`Mind/3-Recursos/agentes/growth-engagement.md`)
+  handles the SYSTEM layer: retention diagnosis, growth/habit loops, activation,
+  and flow-level psych audits (energy across steps, Ask->Value->Ask). When an
+  audit reveals the real problem is retention, activation, or whole-flow energy
+  -- not a single screen -- hand off to it. It hands single-screen audits back
+  to this skill.
+
 When another skill is more appropriate, say so directly.
