@@ -1,8 +1,16 @@
 # Claude Design Skills
 
-Six custom skills that turn Claude Code into a UX researcher, UX strategist, visual craftsperson, design system engineer, motion / creative-coding specialist, and Figma layout craftsperson.
+Six custom skills that turn Claude Code into a UX researcher, UX strategist, visual craftsperson, design system engineer, motion / creative-coding specialist, and Figma layout craftsperson -- plus the tooling to write your product's design rules down and verify them in a real browser.
 
 Built by fusing the best of multiple sources into a cohesive system that covers the full design workflow -- from user research to pixel-perfect implementation to design system infrastructure.
+
+| | |
+|---|---|
+| [`skills/`](skills/) | the six design skills -- the **method** |
+| [`templates/`](templates/) | `DESIGN.md` template -- your product's **rules**, written as constraints |
+| [`commands/`](commands/) | `/design-md` writes those rules, `/design-review` checks them |
+| [`agents/`](agents/) | the `design-review` subagent that drives the browser |
+| [`evals/`](evals/) | activation checks -- tests **over**-activation, not just under |
 
 ## What's Inside
 
@@ -135,6 +143,64 @@ Skills activate **automatically** -- Claude detects when they're relevant based 
 
 Reference files inside each skill load **on-demand**, not all at once. This keeps your context clean while giving Claude access to deep knowledge when needed.
 
+## Beyond skills: writing the rules down, and checking them
+
+Skills carry *method*. They do not carry *your product's rules* -- and an agent with excellent
+method still invents a teal accent on a monochrome site if nothing forbids it.
+
+Two commands and a subagent close that gap. They live outside the skills because they apply to any
+project with an interface, whatever the stack.
+
+### `DESIGN.md` -- the rules, written as constraints
+
+Every project with a UI gets two files **where the work happens**, not in a wiki:
+
+| File | Job |
+|---|---|
+| `CLAUDE.md` | how to work: current state, where the truth lives, what not to touch |
+| `DESIGN.md` | what the product looks like and **what is forbidden** |
+
+The rule that makes `DESIGN.md` work is that it is written **by constraint, not by description**.
+
+```
+Bad:   primary: #1B4DFF
+Good:  primary: #1B4DFF -- CTAs and active states only. Never a background,
+       never decorative. One per screen. If you want two, the layout is wrong.
+```
+
+Description gets ignored. Constraint gets obeyed.
+
+**Never let the model write this file alone** from your Figma or your CSS. It produces perfect
+tokens and invented principles -- a document that reads plausible and is wrong, which is the
+hardest kind to catch. Extract the values with the agent; write the *why* yourself.
+
+Start from [`templates/DESIGN.template.md`](templates/DESIGN.template.md), or run `/design-md`,
+which reads the code for the values and interviews you for the reasoning.
+
+### `/design-review` -- verify in a real browser
+
+Runs the [`design-review`](agents/design-review.md) subagent: loads the project's `DESIGN.md`,
+scopes to the git diff, opens the screen in a real browser, and checks three viewports and both
+themes.
+
+The rule it enforces on itself: **a screenshot is not the first proof.** Measure the computed
+property, then let the image confirm it.
+
+Its five universal checks target what makes agent-built UI read as generic:
+
+1. **Declared font is actually loaded** -- the theme names a family and ships no file
+2. **The code's promise matches the pixel** -- "subtly raised" that is invisible at arm's length
+3. **Each color has one job** -- two accents under ~20 degrees of hue are one accent twice
+4. **States are derived, not invented** -- hover values written by hand mean there is no ramp
+5. **Density varies** -- one deliberately oversized element per screen, or a uniform stack
+
+Every finding carries a measured value. "The contrast looks low" is not a finding; "#7b7970 on
+#f5ede5 is 3.1:1, below 4.5:1" is.
+
+**Requires** the [Playwright MCP](https://github.com/microsoft/playwright-mcp) to interact and the
+[Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp) to audit. With only
+one of them it still runs, and says what it could not cover.
+
 ## Complementary: `/frontend-design`
 
 For bold aesthetic direction (landing pages, portfolios, marketing pages), use the official **[Frontend Design skill](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design)** from Anthropic. It complements these skills by adding creative, distinctive visual identity when an interface needs to stand out.
@@ -158,6 +224,26 @@ npx skills add Gustavosilveira23/claude-design-skills --list
 ```
 
 Later: `npx skills update -g` to pull changes, `npx skills list -g` to see what is installed.
+
+The CLI installs **skills only**. For `/design-md`, `/design-review` and the subagent, copy those
+three files -- they are plain markdown with no dependencies:
+
+```bash
+git clone https://github.com/Gustavosilveira23/claude-design-skills.git
+
+mkdir -p ~/.claude/commands ~/.claude/agents
+cp claude-design-skills/commands/*.md ~/.claude/commands/
+cp claude-design-skills/agents/design-review.md ~/.claude/agents/
+```
+
+Then add the two MCP servers `/design-review` drives:
+
+```bash
+claude mcp add playwright --scope user -- npx @playwright/mcp@latest
+claude mcp add chrome-devtools --scope user -- npx chrome-devtools-mcp@latest
+```
+
+Restart Claude Code -- commands and MCP servers load at startup.
 
 ### Option 2: Copy manually
 
