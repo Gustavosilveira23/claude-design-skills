@@ -81,6 +81,57 @@ Mecanicas, nenhuma depende de opiniao. Rode todas.
    maior comandando cada tela, ou e uma pilha uniforme? Grid de cards visualmente identicos conta
    como falha.
 
+## Passo 4.5 -- Varredura mecanica
+
+As cinco checagens acima pedem julgamento. Estas seis nao pedem nada: rode, leia o numero,
+reporte. Sao as categorias que mais falham em UI gerada por IA e que o olho nao pega.
+
+Rode via `browser_evaluate` na pagina carregada:
+
+```js
+const all = [...document.querySelectorAll('*')].filter(e => e.offsetParent !== null);
+const val = (p) => [...new Set(all.map(e => getComputedStyle(e)[p]))].filter(v => v && v !== '0px');
+({
+  escalaTipo:    [...new Set(all.map(e => getComputedStyle(e).fontSize))].sort(),
+  escalaPeso:    [...new Set(all.map(e => getComputedStyle(e).fontWeight))].sort(),
+  escalaGap:     val('gap'),
+  escalaRadius:  val('borderRadius'),
+  transitionAll: all.filter(e => getComputedStyle(e).transitionProperty === 'all').length,
+  overflowX:     document.documentElement.scrollWidth > window.innerWidth,
+})
+```
+
+Leia assim:
+
+1. **Escala tipografica.** Mais de ~6 tamanhos distintos em uma tela significa que nao existe
+   escala -- os valores foram escolhidos um a um. Peso abaixo de 400 e falha. Peso que muda no
+   hover tambem (reflui o texto).
+2. **Escala de spacing.** Mais de ~6 valores distintos de `gap` significa spacing improvisado.
+   Cheque tambem a proximidade: o gap ENTRE grupos tem que ser pelo menos o dobro do gap DENTRO
+   de um grupo. Se forem iguais, o agrupamento nao existe visualmente.
+3. **Raio concentrico.** Para cada elemento com raio que contem outro com raio:
+   `raio externo = raio interno + padding`. Meça os tres valores e faça a conta. Raio
+   desencontrado e o defeito que mais faz interface parecer barata sem ninguem saber dizer por que.
+4. **Bypass de token.** `grep -rnE "#[0-9a-fA-F]{3,8}" src/ --include=*.tsx --include=*.css` fora
+   do arquivo que define os tokens. Todo hex solto em componente e drift -- o tema muda e ele fica.
+5. **Motion mecanico.** `transitionAll > 0` e falha direta: anima propriedade que ninguem
+   escolheu. Cheque tambem duracao de interacao acima de ~200ms (le como lentidao) e
+   `animation`/keyframes em qualquer coisa que o usuario possa alternar -- keyframe nao aceita
+   interrupcao, entao o segundo clique e ignorado e a interface parece travada.
+6. **Overflow horizontal.** `overflowX: true` em 390px e bloqueante. Barato de medir, comum, e
+   ninguem testa.
+
+**Estados que nao existem** nao aparecem no navegador -- procure no codigo:
+`grep -rniE "empty|loading|skeleton|isLoading|error" src/` na pasta do componente revisado. Um
+componente que lista dados e nao tem resposta pra vazio, carregando e erro esta incompleto, mesmo
+que a tela do caminho feliz esteja perfeita. Reporte como Ajuste, com o nome dos estados que
+faltam.
+
+Quando precisar da regra por tras de um finding (a formula do raio concentrico, alinhamento
+optico, a lista completa de detalhes verificaveis), a fonte e a skill `ui-designer`, arquivo
+`references/interface-checklist.md`. Nao repita a lista inteira aqui: meça, reporte o que falhou,
+e cite o item.
+
 ## Passo 5 -- Acessibilidade
 
 - Contraste WCAG AA (4.5:1 texto normal, 3:1 texto grande e elementos de interface). Calcule por

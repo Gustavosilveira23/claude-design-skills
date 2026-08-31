@@ -269,9 +269,16 @@ For responsive specifications and mobile patterns, see
 5. **Micro-gradients on buttons:** top 2% lighter, bottom 2% darker
 6. **Backdrop blur:** `backdrop-filter: blur(12px)` on sticky nav bars
 7. **Inner shadows for inputs:** `inset` shadows create a recessed feel
-8. **Nested border-radius:** children always have smaller radius than parent
+8. **Nested border-radius:** concentric -- `outer = inner + padding`, not just
+   "smaller than parent"
 9. **Consistent icon style:** same stroke weight, corner radius, optical size
 10. **Gradient text (sparingly):** `background-clip: text` for hero text only
+
+These ten are the techniques that ADD quality. The details that are simply
+**missing** are a separate problem, and judgment does not find them -- reading
+the code does. When the task is polish, or when the complaint is "it looks off"
+and you cannot name why, run the relevant sections of
+[references/interface-checklist.md](references/interface-checklist.md).
 
 ### Dark Mode (First-Class, Not an Afterthought)
 
@@ -350,6 +357,17 @@ showing anything to the user. Do not skip this step.
 - [ ] Responsive behavior tested at all breakpoints?
 - [ ] Touch targets at least 44x44px?
 - [ ] Color contrast passes WCAG AA (4.5:1 text, 3:1 large)?
+
+### Interface Checklist (mandatory when polish is the task)
+
+The list above is judgment-based: it asks whether the system holds together.
+[references/interface-checklist.md](references/interface-checklist.md) is
+evidence-based: every item is a binary check you settle by reading the code.
+
+Run its **Quick Pass** (12 items) on any change. Run the full relevant sections
+when the task is polish, a UI audit, or a component review. Verify in the source,
+not in a screenshot -- an image cannot show you `transition: all`, a missing
+`htmlFor`, or a primitive token.
 
 ### AI Slop Detector (mandatory)
 

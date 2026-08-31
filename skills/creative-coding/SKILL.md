@@ -31,7 +31,35 @@ then proceed.
 
 ---
 
-## Step 0: Which tier does this scene need?
+## Step 0: Does this earn motion? (MANDATORY)
+
+Before choosing a tier, decide whether the effect should exist. The expensive
+mistake is not a badly built effect -- it is a well-built effect that should not
+have been built. Nobody reports "too much motion"; the product just feels
+tiring.
+
+Run the gate:
+
+1. **What does the movement tell the user that the static frame does not?**
+   "It looks nice" only counts in Brand context, and only when named as such.
+2. **How often will one person see this?** Frequent and expected means little or
+   no motion. Rare and meaningful is where motion earns its keep.
+3. **What does it cost when it fails?** Slow device, reduced motion, an
+   interrupted state, a fast user clicking through.
+4. **Would removing it make anything worse?** Build the static version and look
+   at it. If nothing is lost, you have your answer.
+
+If the honest answer is no, say so in one line and offer the cheaper thing --
+never a refusal without a replacement. If the answer is "yes but too loud", cut
+before you kill: halve the duration, drop one property, shrink the magnitude.
+
+For the frequency matrix, the list of what genuinely earns motion, the removal
+test, the vocabulary that stops an agent from overshooting, and the curve
+reference, see [references/restraint.md](references/restraint.md).
+
+---
+
+## Step 0.5: Which tier does this scene need?
 
 Pick the lowest tier that delivers the effect. Each costs more time and
 maintenance than the last.
@@ -135,7 +163,11 @@ Before calling an effect done, check:
 - **Choreography.** Stagger, hierarchy of movement, what enters first and what
   follows. Composition in time.
 - **When NOT to animate.** Restraint is craft. Movement that does not serve the
-  content is noise.
+  content is noise. Run the removal test in
+  [references/restraint.md](references/restraint.md): comment the animation out,
+  look at the static version for ten seconds, and name what the user no longer
+  knows. If the sentence is about you ("it feels flat") and not about them, the
+  problem is the static design and motion is the wrong fix.
 - **The effect must not steal from the content.** The headline wins, always.
 
 For the animation principles, easing as craft, and the reusable fundamentals
@@ -155,6 +187,12 @@ Before integrating into a real page, confirm:
 - [ ] Real title, copy, and links live in the HTML -- canvas/3D text is invisible
       to Google and screen readers. WebGL is decoration on top.
 - [ ] Mobile has a tap path for any hover that hides essential content.
+- [ ] No motion on a high-frequency, low-novelty interaction (list hover, context
+      menu, tab switch, row add/delete). Re-run the Step 0 gate on anything that
+      grew during the build -- effects accumulate one commit at a time.
+- [ ] No `transition: all` anywhere. Properties are named.
+- [ ] Anything the user can toggle animates with a transition, not keyframes, so
+      a second click retargets instead of being ignored.
 
 ---
 

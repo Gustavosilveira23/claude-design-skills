@@ -11,6 +11,57 @@ A design system audit scans the project for violations of the design system:
 token drift, hardcoded values, WCAG violations, component inconsistencies,
 and documentation gaps.
 
+Steps 1-6 measure **how well the system is being followed**. Step 0 measures
+something different and prior: **whether the system exists at all** in each
+area. Run Step 0 first -- a project can score 95% token coverage on the four
+categories it has, while having no answer for motion, stacking, or writing.
+Perfect compliance inside an incomplete system is the most common way an audit
+gives false comfort.
+
+---
+
+## Step 0: Coverage Gate
+
+For each row, the answer is one of: **declared** (a token, a rule, or a written
+decision exists), **implicit** (consistent in practice, nothing written down),
+or **absent**.
+
+Report the table before any finding. "Implicit" is not a failure -- it is a
+question for whoever owns the product. "Absent" in a row the product clearly
+needs is a finding.
+
+| Area | Declared when | Common state |
+|------|---------------|--------------|
+| **Color** | palette + semantic tokens + dark mode + usage rules | usually declared |
+| **Spacing** | a unit scale (4 or 8pt) and named steps | usually declared |
+| **Typography** | type scale, line-height, weights, and the measure cap | scale yes, the rest implicit |
+| **Radius** | a ramp, plus the concentric rule for nesting | value yes, rule absent |
+| **Elevation** | shadow ramp AND a named z-index scale | shadows yes, z-index absent |
+| **Motion** | duration + easing tokens, and the reduced-motion rule | almost always absent |
+| **Iconography** | set, stroke width, size ramp, naming | "we use Lucide" and nothing else |
+| **Breakpoints** | named and used consistently, not ad-hoc | usually implicit |
+| **Component states** | every component answers empty, loading, error, disabled | the biggest real gap |
+| **Writing** | voice, casing, button-label and error-message rules | almost always absent |
+| **Contribution** | how someone adds to the system without breaking it | absent below ~5 people |
+
+Two rows deserve extra weight because they cause visible bugs rather than
+inconsistency:
+
+- **Motion and z-index absent** means every component author invents values.
+  This is where `z-index: 9999` and a modal behind its own backdrop come from.
+- **Component states absent** means the happy path is designed and nothing else
+  is. Check by grepping the component folder for `empty`, `loading`, `skeleton`,
+  `error`. A component that renders a list with no answer for zero items is
+  incomplete no matter how good the populated view looks.
+
+Scale the gate to the team. Contribution rules, release cycle and support
+channels matter for a system serving several squads; for a solo designer or a
+small product they are noise, and reporting them as gaps is padding. Say which
+rows you skipped and why.
+
+Adapted from the [Design System Checklist](https://www.designsystemchecklist.com/),
+narrowed to what a small team actually acts on.
+
 ---
 
 ## Step 1: Scan for Token Drift

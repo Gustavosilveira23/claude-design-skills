@@ -102,6 +102,12 @@ Don't block other work -- just surface the recommendation.
 Read [references/audit-checklist.md](references/audit-checklist.md) for the
 complete audit workflow.
 
+**Run the Coverage Gate (Step 0) first.** It asks whether the system covers each
+area at all -- motion, z-index, iconography, component states and writing are
+the rows that are usually absent. A project can score 95% token coverage on the
+four categories it happens to have. Compliance inside an incomplete system is
+the most common way an audit gives false comfort.
+
 **Summary:** Scan the project for:
 1. **Token drift** -- colors, spacing, radii, shadows used outside the system
 2. **Hardcoded values** -- hex colors, pixel values not from tokens
@@ -450,12 +456,41 @@ Without tiers, you'd change it in 200 places.
 
   /* Charts */
   --chart-1 through --chart-5
+
+  /* Motion -- see below, these are missing from most systems */
+  --duration-fast, --duration-base, --duration-slow
+  --ease-out, --ease-in, --ease-in-out
+
+  /* Stacking */
+  --z-base, --z-dropdown, --z-sticky, --z-overlay, --z-modal, --z-toast
+
+  /* Icon */
+  --icon-stroke, --icon-size-sm, --icon-size-base, --icon-size-lg
 }
 
 .dark {
   /* All variables redefined for dark mode */
 }
 ```
+
+**The three categories almost every system forgets.** Color, spacing, type and
+radius get tokenized because they are visible in Figma. These do not, so they
+get hardcoded in components and drift immediately:
+
+- **Motion.** Without duration and easing tokens, every developer picks their own
+  `300ms ease-in-out` and the product has no consistent tempo. Defaults:
+  `--duration-fast: 100ms` (hover, press), `--duration-base: 200ms` (most
+  interactions -- anything slower reads as lag), `--duration-slow: 300ms`
+  (overlays, route transitions). Easing: out for entering, in for leaving,
+  in-out for repositioning. Motion also needs an accessibility rule, not just
+  values: state where `prefers-reduced-motion` is handled -- globally, or per
+  component.
+- **Z-index.** An undeclared z-index scale is how you get `z-index: 9999` in a
+  dropdown and a modal that renders behind it. Six named layers is enough.
+- **Iconography.** Not just "use Lucide" -- declare stroke width, the size ramp,
+  optical alignment rule, and naming. Two icon sets with different stroke weights
+  in the same product is the most visible inconsistency a user never consciously
+  notices.
 
 ### Tailwind CSS 4 mapping
 

@@ -8,7 +8,7 @@ Sem argumento, revise o que mudou (git diff) ou pergunte qual e o alvo.
 ## O que fazer
 
 1. **Delegue ao subagente `design-review`.** Ele tem o metodo completo -- regra do projeto,
-   viewports, as cinco checagens, acessibilidade e copy. Passe no prompt:
+   viewports, as cinco checagens, a varredura mecanica, acessibilidade e copy. Passe no prompt:
    - o alvo (arquivo, URL ou escopo do diff)
    - a pasta do projeto, pra ele achar o `DESIGN.md`
    - qualquer restricao dita nesta conversa
