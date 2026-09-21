@@ -75,6 +75,13 @@ two nobody notices consciously.
 - **Font weight never changes on hover or on the active state.** Weight change
   reflows the text and shifts the layout. Change color or background instead.
 - **No font weight below 400.** Medium headings sit best at 500-600.
+- **A floor on font size, and the scale does not excuse crossing it.** Body and
+  label text stays at or above 12px; 11px is the hard floor for anything a user
+  is expected to read. *Check:* a computed `font-size` below the floor, and a
+  scale that gained a smaller step recently. Adding a step to the scale to fit
+  text that was already too small launders the token, not the problem -- the
+  text is still unreadable and now the scale endorses it. Fix the density or
+  the hierarchy instead.
 - **Copy stored in natural case, presentation controlled with `text-transform`.**
   *Check:* `ALL CAPS` typed into the JSX. Now it cannot be lowercased for another
   surface, and screen readers may spell it out.
@@ -102,6 +109,12 @@ two nobody notices consciously.
 - **Contrast is measured against the background the element actually renders on**,
   not the page background. A muted label on a card is a different test than the
   same label on canvas.
+- **A token that fails AA is labelled as failing, with the measured ratio, at
+  the place it is defined.** The faintest step in a neutral ramp usually does
+  fail -- that is fine for decorative rule lines or a disabled state, and not
+  fine for text. *Check:* the palette's lightest text token has no recorded
+  ratio next to it. Without the number written down, the next person reads it
+  as "subtle" and uses it for a caption.
 - **Dark mode is not the light palette inverted.** *Check:* dark values that are
   arithmetic mirrors of the light ones.
 - **One theme mechanism for every token:** `prefers-color-scheme` or a `.dark`
