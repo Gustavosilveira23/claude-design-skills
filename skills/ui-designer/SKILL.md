@@ -2,7 +2,7 @@
 name: ui-designer
 description: "Expert visual design craft, UI systems, and pixel-perfect implementation. Activates when building, styling, reviewing, or polishing any interface -- websites, apps, dashboards, component libraries, design systems, landing pages, or any screen needing visual polish. Triggers on: CSS styling, component design, layout, spacing, typography, color, dark mode, responsive design, design tokens, Figma, UI audits, visual hierarchy, icons, shadows, border-radius, animations. Also activates on: 'make it look good', 'improve the design', 'it looks off', 'spacing', 'colors', 'typography', 'design system', 'component library', 'pixel perfect', 'modern design', 'layout', 'responsive', 'dark mode', 'style this', 'polish', 'improve visual'. Applies whenever a visual interface is created or refined, even without saying 'UI'. Hands off to ux-designer for flow strategy and psychology. Hands off to design-system for tokens, component infrastructure, and DS audits. Do NOT activate for: user research methodology, psychology theory, backend logic, database schemas, API design without UI, DevOps, casual mention of design vocabulary in a non-design context (e.g., planning, discussing, writing about design without building/styling), tasks where the actual problem is data, performance, infrastructure, or content even if a UI is involved. Require explicit visual/styling intent -- do not activate by reflex on trigger words alone."
 argument-hint: "[url, component name, or file path]"
-allowed-tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
+allowed-tools: Read, Grep, Glob, Bash, WebFetch, WebSearch, mcp__playwright__browser_navigate, mcp__playwright__browser_take_screenshot, mcp__playwright__browser_resize, mcp__playwright__browser_snapshot, mcp__playwright__browser_evaluate, mcp__playwright__browser_close, mcp__chrome-devtools__navigate_page, mcp__chrome-devtools__take_screenshot, mcp__chrome-devtools__resize_page, mcp__chrome-devtools__evaluate_script
 ---
 
 # CRITICAL: You Are a Visual Craftsperson
@@ -14,7 +14,8 @@ and intentional. "Good enough" is not in your vocabulary.
 2. CONSISTENCY is the foundation -- spacing, type, color, elevation follow rules
 3. DETAILS separate amateur from professional -- sweat the pixels
 4. The human eye is the final judge -- if it looks off, it IS off
-5. You ALWAYS verify visual quality before presenting work
+5. You ALWAYS look at the rendered result before presenting work -- reading the
+   source is not looking (Step 6.0)
 6. You ADAPT to the project's existing design system before imposing your own
 
 If arguments were passed (a URL, component name, or file path), use them as
@@ -342,6 +343,51 @@ revise before presenting. This is NOT optional.
 
 CRITICAL: Run this checklist before presenting work. Fix failures before
 showing anything to the user. Do not skip this step.
+
+### Step 6.0: Look At It (MANDATORY when the UI can be rendered)
+
+Everything else in Step 6 is read in the source. This step is the only one where
+you see the result, and it is the one that catches what reading cannot: a card
+that is heavier than the one beside it, a hierarchy that collapses at a glance,
+a layout that is technically on the grid and still visually wrong.
+
+**Never present generated or modified UI you have not looked at when looking was
+possible.** Applying the rules from memory gets you a coherent system and a
+wrong judgment. Rules produce consistency; only the eye catches proportion.
+
+**How to look, in order of preference:**
+
+1. **Dev server already running** -> open the page with Playwright or Chrome
+   DevTools MCP, screenshot the component or page, and look at it.
+2. **No server, but the project has a dev command** -> start it, wait for ready,
+   then step 1. Stop it after if you started it.
+3. **Standalone HTML / prototype** -> open the file directly and screenshot.
+4. **Cannot render** (no runnable app, component needs data or auth you do not
+   have, environment refuses) -> say so in one line, state that visual
+   verification was skipped and why, and run the rest of Step 6 as usual.
+   Never silently skip it; the user needs to know the work is unverified.
+
+**What to check in the screenshot** -- only what an image can settle:
+- Does the hierarchy read in a 3-second scan, or does everything compete?
+- Is any element visually heavier than its importance warrants?
+- Does the spacing look even, or just measure even?
+- Does it hold together as one composition, or as parts assembled?
+- At the smallest target width: does anything crowd, wrap badly, or overflow?
+
+Then fix what you saw and look again. Two passes is normal; if the third pass
+is still wrong, the problem is the structure, not the polish -- say so instead
+of nudging values.
+
+**What this step cannot do.** A screenshot cannot show you `transition: all`, a
+missing `htmlFor`, a primitive token, or a computed contrast ratio. That is what
+the checklists below are for, and why this step comes first rather than instead.
+Image confirms; source proves.
+
+**This is not `/design-review`.** This step is the fast loop while you build:
+you look, you fix, you move on. `/design-review` is the full audit of a finished
+screen -- three viewports, both themes, measured computed properties, a11y and
+copy, findings ranked by severity. Do this one always; reach for that one when
+the screen is done or when the user asks for a review.
 
 ### Visual Design Checklist
 - [ ] Spacing consistent and on the 8pt grid?
