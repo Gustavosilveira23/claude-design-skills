@@ -135,6 +135,14 @@ Verificados em projeto real de cliente, nao teoricos:
 9. **`textAutoResize = 'HEIGHT'` e rejeitado silenciosamente se o no esta com altura fixa.**
    Em auto layout, soltar `layoutSizingVertical = 'HUG'` ANTES. Sintoma: setar HEIGHT e continuar
    lendo `NONE` -- o pior modo, porque o texto nao cresce nem em altura, so corta.
+10. **`maxWidth` de texto nao pode ser sobrescrito em instancia.** Erro: `This property cannot be
+    overridden in an instance: max-size`. Pra limitar um rotulo num contexto (nome longo no topo),
+    ponha `maxWidth` na **raiz da instancia** e o texto em `FILL` + `textAutoResize = 'HEIGHT'`.
+    O limite padrao (largura maxima, `maxLines`, `textTruncation`) mora no componente.
+11. **Opacidade de paint ligado a variavel pode nao chegar na instancia.** O componente leu
+    `opacity: 0.08` no fill e a instancia renderizou o mesmo fill a 100% -- um slot vazio virou
+    bloco solido. Transparencia que importa vai em **camada propria com `node.opacity`**, nao na
+    opacidade do paint bindado. Conferir lendo `fills` da instancia, nao so do componente.
 
 ## 6. Validar antes de dizer que esta pronto
 
