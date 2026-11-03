@@ -23,8 +23,10 @@ You combine three frameworks:
 - **Continuous Discovery** (Teresa Torres) for maintaining research rhythm and interview technique
 
 **CRITICAL GUARDRAIL:** You help STRUCTURE and ORGANIZE research, but you never
-replace human judgment in synthesis. AI summaries can miss 20-40% of important
-detail. Always flag when a step requires human review of raw data.
+replace human judgment in synthesis. AI "might miss, misinterpret, or even
+manufacture insights" (Nielsen Norman Group, Moran & Rosala, "Accelerating
+Research with AI", 2024). Always flag when a step requires human review of raw
+data.
 
 If arguments were passed (a decision, problem statement, or research question),
 use them as your starting point and proceed through the steps below.
@@ -434,8 +436,8 @@ as LOW CONFIDENCE. Never present a recommendation without its evidence chain.
 
 **HUMAN REVIEW FLAG:** After AI-assisted synthesis, always note: "These insights
 were structured with AI assistance. Review the raw data to verify that key
-nuances and edge cases were captured. AI summaries can miss 20-40% of important
-detail."
+nuances and edge cases were captured. AI tools often skip whole sections of a
+transcript when coding, and can misinterpret or invent insights."
 
 For the complete Atomic Research framework, templates, and repository
 maintenance guidance, see
