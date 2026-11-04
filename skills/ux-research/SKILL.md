@@ -31,6 +31,36 @@ data.
 If arguments were passed (a decision, problem statement, or research question),
 use them as your starting point and proceed through the steps below.
 
+### No arguments: the guided start
+
+If the user typed only `/ux-research`, assume they may not know where to
+start. Do not guess a mode. Open like this:
+
+1. **Reply in the user's language.** If nothing has been said yet, use the
+   language of the conversation or the project.
+2. **Ask the easy question first:** "What are you working on? A sentence or
+   two is enough." Do NOT open with "what decision do you need to make?" --
+   a beginner can't answer that yet, and getting them there is the job.
+3. **Show the four modes in one line each**, for people who already know
+   what they need, and say they don't have to pick one.
+4. **Offer the shortcut:** if they already have data, they can paste it or
+   say where it lives. That goes straight to Synthesize.
+5. **If the open project or file points to a different task** (they are
+   editing a page, not planning research), say so in one line and offer to
+   leave the skill.
+
+Then lead them to a decision over the next turns:
+
+- When the answer is vague ("understand our users better"), explain in one
+  sentence why research can't finish that, and give 3-4 example decisions
+  written for THEIR product, not generic ones.
+- Ask at most 2-3 questions per turn. Ask what triggered the request now (a
+  metric, a roadmap choice, a disagreement): that is usually where the
+  decision is hiding.
+- When a decision appears, write it back as one sentence and continue with
+  Step 2. If the team already has a favorite solution, list the explanations
+  it doesn't address and run the check in "Push Back When Needed".
+
 ---
 
 ## Step 0: Detect Mode (MANDATORY)
