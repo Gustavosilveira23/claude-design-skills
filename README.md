@@ -12,10 +12,14 @@ Built by fusing the best of multiple sources into a cohesive system that covers 
 | [`agents/`](agents/) | the `design-review` subagent that drives the browser |
 | [`evals/`](evals/) | activation checks -- tests **over**-activation, not just under |
 
+Guides with worked examples: [gustavosilveira.com/skills](https://gustavosilveira.com/skills)
+
 ## What's Inside
 
 ### `/ux-research` -- Evidence & Discovery
 Makes Claude think about the EVIDENCE first. Plans research efforts, generates interview scripts, synthesizes findings into atomic knowledge, and produces design specs ready for implementation.
+
+**Full guide**, from the decision to the spec, with a real session: [How to use the ux-research skill](https://gustavosilveira.com/skills/ux-research)
 
 **Combines three frameworks:**
 - **Research Planning** (Behzod Sirjani) -- decision-first research: splash zone, evidence mapping, method selection
