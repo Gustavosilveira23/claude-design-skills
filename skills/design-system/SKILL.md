@@ -1,7 +1,6 @@
 ---
 name: design-system
-description: "Design system infrastructure: create, maintain, audit, and document design systems with shadcn/ui + Tailwind CSS 4 + Next.js. Activates when creating design systems, adding components to a design system, auditing token consistency, documenting components, syncing with Figma, building pages from a design system, or generating a system context briefing for AI. Triggers on: 'design system', 'design tokens', 'styleguide', 'token drift', 'sync figma', 'showcase', 'audit DS', 'add component', 'context doc', 'design system briefing'. Also activates on: 'shadcn setup', 'globals.css tokens', 'CSS variables', 'create styleguide', 'check consistency', 'AI-ready design system'. Handles the infrastructure layer -- tokens, components, consistency, documentation. Hands off to ui-designer for visual craft and polish. Hands off to ux-designer for experience strategy and psychology. Do NOT activate for purely visual styling decisions, user research, backend logic, or DevOps."
-argument-hint: "[mode: audit|foundation|component|page|document|sync-figma|context] [component name, screenshot, or Figma URL]"
+description: "Design system infrastructure: create, maintain, audit, and document design systems with shadcn/ui + Tailwind CSS 4 + Next.js. Activates when creating design systems, adding components to a design system, auditing token consistency, documenting components, syncing with Figma, building pages from a design system, or generating a system context briefing for AI."
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
 ---
 
