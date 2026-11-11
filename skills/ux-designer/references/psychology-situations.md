@@ -29,7 +29,7 @@ for a specific user context to select the most relevant psychological levers.
 ## When the user is overloaded with information
 - **Cognitive Load**: reduce the mental effort needed to complete the task.
 - **Progressive Disclosure**: reveal complexity gradually, not all at once.
-- **Miller's Law**: working memory holds 5 plus or minus 2 items. Group information.
+- **Miller's Law**: working memory holds 7 plus or minus 2 items (Miller, 1956); later research puts it closer to 4 chunks (Cowan, 2001). Group information.
 - **Chunking**: grouped information is easier to process and remember.
 - **Tesler's Law**: over-simplifying can transfer complexity to the user.
 
@@ -44,7 +44,7 @@ for a specific user context to select the most relevant psychological levers.
 - **Peak-End Rule**: experiences are judged by the emotional peak and the ending.
 - **Serial Position Effect**: first and last items in a list are remembered most.
 - **Recognition Over Recall**: it's easier to recognize than remember. Show options instead of free input.
-- **Zeigarnik Effect**: incomplete tasks are remembered more than complete ones. Use as a return hook.
+- **Ovsiankina Effect**: people tend to resume interrupted tasks. Use as a return hook. (The related Zeigarnik claim, that unfinished tasks are remembered better, failed to replicate: Ghibellini & Meier, 2025.)
 - **Spacing Effect**: spaced learning is more effective than concentrated.
 
 ## When the user is discovering the product for the first time

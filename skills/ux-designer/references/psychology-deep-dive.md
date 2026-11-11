@@ -7,7 +7,8 @@ making design choices that involve how humans perceive, decide, and behave.
 
 ## Cognitive Load Theory (Detailed)
 
-Working memory holds ~4 chunks (Miller's revised estimate). Every UI element
+Working memory holds ~4 chunks (Cowan, 2001; Miller's 1956 estimate was 7
+plus or minus 2). Every UI element
 competes for processing bandwidth.
 
 ### Progressive Disclosure in Practice
@@ -17,7 +18,7 @@ competes for processing bandwidth.
 - Onboarding: one action per screen with clear progress
 
 ### Sensible Defaults
-- Pre-select the most common option (80% of users choose this)
+- Pre-select the most common option
 - Pre-fill from previous sessions or user data
 - Date pickers default to today, not January 1, 2000
 - Country selector defaults to user's detected location
@@ -33,7 +34,8 @@ competes for processing bandwidth.
 ## Decision Architecture (Detailed)
 
 ### Default Bias
-72% of users accept defaults. This is enormous power — make defaults the
+Most people stick with the default (Johnson & Goldstein, 2003). This is
+enormous power — make defaults the
 best option for most users, not the best option for the business.
 
 ### Anchoring
@@ -44,7 +46,7 @@ The first number or option anchors all subsequent judgment:
 
 ### Choice Overload (Hick's Law)
 Response time increases logarithmically with number of options:
-- Navigation: 5-7 top-level items maximum
+- Navigation: a handful of top-level items (a convention, not a measured limit)
 - Settings: categorize, don't list everything flat
 - Pricing: 3 plans. If more, use a comparison tool
 - Filters: show top 5, collapse the rest under "More"
@@ -57,7 +59,8 @@ Small commitments lead to larger ones:
 - "Start free" not "Buy now" as the first CTA
 
 ### Loss Aversion
-Losses feel ~2x more intense than equivalent gains:
+Losses weigh roughly twice as much as equivalent gains (Tversky & Kahneman,
+1992):
 - Destructive confirmations: "You'll lose all 47 photos"
 - Retention: "Keep your 3 saved projects"
 - DON'T overuse — chronic loss framing creates anxiety

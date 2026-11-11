@@ -94,7 +94,7 @@ the full template. Match effort to impact.
 
 Before making visual decisions, define the psychological intent for the primary
 action on the screen. ELMR ensures every screen has a clear emotional and
-motivational architecture.
+motivational architecture. (ELMR comes from Reforge's user psychology material.)
 
 **E -- Emotion:** What specific emotion should the user feel on this screen?
 - Be precise: not "positive" but "confident to proceed" or "curious to explore"
@@ -128,7 +128,8 @@ Apply these lenses to every design decision. They are the science of how humans
 process interfaces.
 
 ### Cognitive Load
-The brain holds ~4 chunks in working memory. Every element competes for that.
+Working memory holds about four chunks (Cowan, 2001). Every element competes
+for that.
 
 - **Progressive disclosure:** show only what's needed for the current step
 - **Sensible defaults:** pre-select the most common option
@@ -137,23 +138,26 @@ The brain holds ~4 chunks in working memory. Every element competes for that.
 - **Consistency:** same action always looks and behaves the same way
 
 ### Visual Hierarchy
-Users scan in 3 seconds. They don't read. Design for the scan.
+Users scan before they read, and judge visual appeal in as little as 50 ms
+(Lindgaard et al., 2006). Design for the scan.
 
 - Most important thing first, supporting context second, actions third
 - Size, weight, contrast, and whitespace create hierarchy -- not decoration
 - One hero element per view. If everything is emphasized, nothing is
-- Left-aligned content gets 30% more attention than right-aligned
+- About 80% of viewing time goes to the left half of the page (NN/g, 2017).
+  Put what matters on the left
 
 ### Feedback Loops
 Every action needs a response. Silence is the enemy.
 
-- **Immediate:** button press, toggle, checkbox (< 100ms)
-- **Progress:** skeleton screens, progress bars for anything > 1 second
+- **Immediate:** button press, toggle, checkbox (< 100ms, Nielsen 1993)
+- **Progress:** a busy indicator or skeleton for waits over ~1 second; a
+  percent-done progress bar for waits over ~10 seconds (Nielsen, 1993)
 - **Completion:** success messages, celebrations, next steps
 - **Error:** what went wrong + why + what to do + preserve user's work
 
 ### Emotional Design
-- First impressions set expectations in 3 seconds
+- First impressions form in a fraction of a second and color what follows
 - Reduce anxiety around irreversible actions (confirmation, undo)
 - Celebrate success moments (but never slow people down)
 - Match tone to emotional state (calm for errors, encouraging for progress)
@@ -163,7 +167,8 @@ How you present choices changes what people choose:
 
 - **Default bias:** most users accept defaults -- make defaults the best option
 - **Anchoring:** the first option sets expectations for everything after
-- **Choice paralysis:** beyond 5-7 options, decision quality drops
+- **Choice overload:** more options slow decisions (Hick's Law). Whether they
+  also make choices worse depends on context (Scheibehenne et al., 2010)
 - **Commitment escalation:** small yeses lead to big yeses (email before CC)
 - **Loss aversion:** "Don't lose your progress" > "Save your progress"
 
@@ -188,7 +193,8 @@ trusting, overloaded, etc.), see
 
 ### Navigation Principles
 - Users should always know: where am I, where can I go, how do I get back
-- Breadth over depth: 7 top-level items beats 3 levels of nesting
+- Breadth over depth: broad, shallow menus beat deep nesting, short of the
+  extreme (Larson & Czerwinski, 1998)
 - Consistent navigation placement across all pages (spatial memory)
 - "Where am I?" should be answerable in 1 second on any screen
 
@@ -197,14 +203,16 @@ trusting, overloaded, etc.), see
 - **F-pattern for text-heavy pages:** key info in the first two words of each line
 - **Z-pattern for visual pages:** eye follows top-left to top-right to bottom-left
   to bottom-right
-- **Above the fold:** 80% of viewing time happens above the fold
+- **Above the fold:** about 57% of viewing time happens above the fold
+  (NN/g, 2018; it was 80% in 2010). Lead with what matters, but people scroll
 
 ### Design the Flow, Not Just the Screen
 - **Happy path:** the ideal journey from start to finish
 - **Edge cases:** 0 items? 1,000 items? Long names? Missing data?
 - **Error recovery:** every error needs a clear path back to success
 - **Empty states:** the first thing new users see -- make it useful, not "no data"
-- **Loading states:** skeleton screens (show structure) beat spinners (show nothing)
+- **Loading states:** skeleton screens (show structure) for full-page loads,
+  spinners for a single module, progress bars past ~10 seconds (NN/g, 2023)
 
 For flow design patterns, onboarding patterns, and the cross-industry pattern
 library, see [references/patterns-and-flows.md](references/patterns-and-flows.md).
@@ -299,8 +307,10 @@ AI language tells (EN/PT-BR/ES word lists), and component patterns, see
 Accessibility is UX for everyone. Not a separate checklist -- it is fundamental
 to how every interface works.
 
-- **Touch targets:** 44x44px minimum, 48px ideal
-- **Color contrast:** 4.5:1 for text, 3:1 for large text (WCAG AA)
+- **Touch targets:** aim for 44x44 pt (Apple) or 48x48 dp (Android). The
+  WCAG AA floor is 24x24 CSS px (2.5.8); 44x44 is AAA (2.5.5)
+- **Color contrast:** 4.5:1 for text, 3:1 for large text (18pt, or 14pt bold)
+  (WCAG AA)
 - **Semantic HTML:** correct elements, not divs with click handlers
 - **Keyboard navigation:** every interactive element reachable via Tab
 - **Screen readers:** aria-labels, aria-live regions, heading hierarchy
@@ -346,14 +356,14 @@ presenting. Do not skip this step.
 - [ ] Every action has visible feedback?
 - [ ] Error states are helpful, specific, and recoverable?
 - [ ] Works with keyboard only?
-- [ ] Loading states use skeletons, not spinners?
+- [ ] Loading states fit the wait (skeleton, spinner or progress bar)?
 - [ ] Empty state is useful, not just "no data found"?
 - [ ] Flow handles edge cases (0, 1, many, missing data)?
 - [ ] Microcopy is clear, specific, and actionable?
 - [ ] Feels good on mobile, not just "fits"?
 
 ### Accessibility Checklist
-- [ ] Touch targets at least 44x44px?
+- [ ] Touch targets 44x44 where possible, never below 24x24 CSS px?
 - [ ] Color contrast passes WCAG AA?
 - [ ] `prefers-reduced-motion` respected?
 - [ ] All inputs have visible labels?
@@ -380,7 +390,8 @@ presenting. Do not skip this step.
 
 ### Audit Format: CLEAR Scorecard (for detailed assessments)
 
-When a detailed per-dimension audit is requested, use the CLEAR scorecard.
+When a detailed per-dimension audit is requested, use the CLEAR scorecard,
+adapted from Growth.Design's CLEAR UI framework.
 Rate each dimension 1-5 with specific observations.
 
 | Dimension | Score (1-5) | Observation | Recommendation |
@@ -467,7 +478,7 @@ problems. Look for cross-industry inspiration, not just direct competitors.
 - **NEVER** use hover as the only way to reveal critical functionality
 - **NEVER** hide essential navigation more than one level deep
 - **NEVER** create a flow without an escape route at every step
-- **NEVER** assume users read -- they scan in 3 seconds
+- **NEVER** assume users read -- they scan first
 - **NEVER** add animation without a communication purpose
 
 ---

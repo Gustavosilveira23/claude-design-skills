@@ -27,7 +27,8 @@ Show value before asking for anything.
 - Canva: template visible before login required
 
 ### Key Onboarding Rules
-- Time-to-value should be under 60 seconds
+- Get to the first visible value as fast as possible (measure it; there is no
+  universal number)
 - Ask only for what you need RIGHT NOW
 - Use possessive language from step one ("Your workspace")
 - Every step should feel like progress, not paperwork
@@ -54,8 +55,9 @@ Show value before asking for anything.
 ### Password Reset
 - Never say "that email doesn't exist" (security risk)
 - "If an account exists, we've sent a reset link"
-- Link expires in 1 hour, one-time use
-- After reset: auto-login, don't make them sign in again
+- Link is one-time use and expires after a short period
+- After reset: send them to sign in. Don't log them in automatically (OWASP
+  Forgot Password Cheat Sheet)
 
 ---
 
@@ -101,7 +103,7 @@ Show value before asking for anything.
 - Empty state shows success: "All caught up"
 
 ### Key Dashboard Rules
-- Answer "is everything okay?" in 3 seconds
+- Answer "is everything okay?" at a glance
 - Most dashboards show too much — ruthlessly prioritize
 - Real-time data needs visible refresh timestamps
 - Mobile dashboards show the top 3 metrics, not everything
