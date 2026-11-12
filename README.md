@@ -44,6 +44,8 @@ Makes Claude think about the EVIDENCE first. Plans research efforts, generates i
 ### `/ux-designer` -- Strategy & Psychology
 Makes Claude think about the **human first**. Asks who the user is before building, applies psychology (ELMR, CLEAR, cognitive load, decision architecture), designs flows not just screens, and pushes back on bad UX decisions.
 
+**Full guide**, from a research brief to a CLEAR audit, with a real session: [How to use the ux-designer skill](https://gustavosilveira.com/skills/ux-designer)
+
 **Includes:**
 - ELMR framework (Emotion, Logic, Motivation, Reward) for psychological intent mapping
 - CLEAR scorecard (Copy, Layout, Emphasis, Accessibility, Reward) for detailed audits with 1-5 scoring
