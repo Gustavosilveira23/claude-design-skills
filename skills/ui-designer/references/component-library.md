@@ -47,8 +47,8 @@ Horizontal padding on buttons = 2× vertical padding.
 ## Inputs
 
 ### Anatomy
-- Label above input (top-aligned = fastest completion)
-- Label-to-input gap: 4-6px
+- Label above input by default (easy to scan, fits narrow screens)
+- Label-to-input gap: 4-8px
 - Between form fields: 16-24px (MUST exceed label-to-input gap)
 - Placeholder: format hint only, never the label
 - Helper text: below input, lighter color
@@ -174,7 +174,8 @@ Must match button heights in the same size class. A 40px button next to a
 
 - Position: top-right or bottom-center
 - Width: 320-400px
-- Auto-dismiss: 5-8 seconds for info, never for errors
+- Auto-dismiss short confirmations after ~5 seconds, paused on hover and focus;
+  longer text or an action ("Undo") gets more time. Never auto-dismiss errors
 - Stack from newest on top
 - Include close button
 - Action link when relevant ("Undo", "View")

@@ -29,8 +29,7 @@ The **Quick Pass** at the bottom is the 12-item version for small changes.
 
 ## 1. Nesting and alignment
 
-The two items that most consistently separate professional from amateur, and the
-two nobody notices consciously.
+Details viewers rarely notice when they are right, and feel when they are wrong.
 
 - **Concentric border radius on any nested element.** `outer radius = inner radius
   + padding`. A 12px card inside 8px padding needs a 20px outer radius.
@@ -54,8 +53,8 @@ two nobody notices consciously.
 - **Prefer a layered box-shadow over a solid 1px border** on cards and inputs.
   Shadows use transparency, so they survive being placed on an image or a colored
   background; a solid border does not.
-  *Check:* `border: 1px solid` on a surface that can move. Three-layer recipe is
-  in `polish-and-craft.md`.
+  *Check:* `border: 1px solid` on a surface that can move. Layered recipes are in
+  the Shadow Scale of `design-tokens.md`.
 - **No fixed width or height on a text container.** Text reflows; boxes that do
   not will clip it in another language.
 
@@ -129,7 +128,8 @@ Motion craft (what to animate, easing, when to stay still) lives in
 faults.
 
 - **Never `transition: all`.** Name the properties.
-  *Check:* grep. This is the single most common motion bug in AI-generated CSS.
+  *Check:* grep. `all` also animates properties you never meant to (color,
+  layout), and it is the easiest motion fault to find.
 - **Interactions use CSS transitions; one-shot sequences use keyframes.**
   Transitions retarget when the user changes their mind mid-animation; keyframes
   run their fixed timeline no matter what. A dropdown that ignores a second click
@@ -156,7 +156,7 @@ faults.
 ## 5. Inputs and forms
 
 - **Clicking the label focuses the input.** *Check:* `<label htmlFor>` or a
-  wrapping label. Missing this is the most common form defect.
+  wrapping label. Without it, screen readers also lose the field's name.
 - **Inputs live inside a `<form>`** so Enter submits.
 - **Correct `type` and `inputmode`** -- `email`, `password`, `numeric`.
 - **`spellcheck` and `autocomplete` disabled** where they do not apply.
@@ -175,8 +175,9 @@ faults.
 
 ## 6. Hit areas and pointer
 
-- **Minimum hit area 24x24px; 40x40 on desktop, 44x44 on touch where the layout
-  allows.** Extended hit areas must not overlap each other.
+- **Minimum hit area 24x24px (the WCAG 2.2 AA floor, SC 2.5.8); 40x40 on
+  desktop, 44x44 on touch where the layout allows.** Extended hit areas must not
+  overlap each other.
 - **No dead zones between items in a list.** Increase padding rather than adding
   margin -- a 4px gap where nothing is clickable feels like the interface is
   ignoring you.
@@ -201,8 +202,11 @@ faults.
 - **Native elements for native jobs.** `<button>` for actions, `<a>` for
   navigation. A `div` with an onClick has no focus, no Enter, no role.
 - **Style `:focus-visible`.** Never `outline: none` without a replacement.
-- **Focus rings use `box-shadow`, not `outline`** -- outline still ignores border
-  radius in older Safari.
+- **Focus rings use `outline` with `outline-offset`.** It follows border radius
+  in current browsers (Safari since 16.4, 2023) and survives Windows High
+  Contrast (forced colors), where `box-shadow` is removed and the ring vanishes.
+  If the design needs a `box-shadow` ring, keep `outline: 2px solid transparent`
+  under it so forced colors still draws one.
 - **`tabindex` is only ever 0 or -1.** Positive values break the natural order.
 - **Sequential lists are navigable with arrow keys**, and deletable with
   Cmd+Backspace where deletion is a primary action.
@@ -254,8 +258,8 @@ faults.
 
 ## Quick Pass
 
-For a small change or a fast second opinion. These 12 catch the majority of real
-defects:
+For a small change or a fast second opinion. These 12 are cheap to check on
+every change:
 
 1. Concentric radius on nested elements
 2. Group gap at least 2x inner gap
@@ -278,6 +282,10 @@ Compiled from three references, cross-checked and deduplicated:
 - [Interface Cheat Sheet](https://interfaces.dev/cheat-sheet) -- Jakub Krehel
 - [Details That Make Interfaces Feel Better](https://jakub.kr/writing/details-that-make-interfaces-feel-better) -- Jakub Krehel
 
-Where the sources disagreed, the stricter rule was kept. Items already covered by
+Where the sources disagreed, the stricter rule was kept. One deliberate departure:
+the Web Interface Guidelines recommend `box-shadow` focus rings because of an old
+Safari limit; its own footnote records the Safari 16.4 fix, and `box-shadow`
+disappears in forced colors, so this file uses `outline`. Hit-area floor from
+WCAG 2.2 (SC 2.5.8). Items already covered by
 `polish-and-craft.md` (easing curves, shadow recipes, touch target tables) are
 referenced rather than repeated.

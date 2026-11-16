@@ -32,7 +32,7 @@ repeatedly). When a rule has different applicability, the column shows it.
 ### VD-01: Side-Tab Accent Border
 - **Detection:** `[CLI]` grep for `border-l-` / `border-r-` with colored class on cards
 - **What it is:** Thick colored border on one side of a card
-- **Why slop:** The most recognizable tell of AI-generated UIs
+- **Why slop:** Listed in the Impeccable catalog as a signature of generated UI
 - **Fix:** Bring color INSIDE the card (colored title, dot indicator, icon)
 - **Applies to:** Brand + Product (never OK)
 
@@ -83,11 +83,13 @@ repeatedly). When a rule has different applicability, the column shows it.
 ## 2. Typography
 
 ### TY-01: Flat Type Hierarchy
-- **Detection:** `[CLI]` check font sizes used -- if ratio between consecutive
-  sizes < 1.2, hierarchy is flat
+- **Detection:** `[CLI]` check font sizes used -- consecutive sizes 1-2px apart,
+  or a ratio below 1.125, means size is not carrying hierarchy
 - **What it is:** Font sizes too close together
 - **Why slop:** No clear visual hierarchy
-- **Fix:** Use a scale ratio of at least 1.2 (see SKILL.md Step 1 Typography)
+- **Fix:** Use a scale (see SKILL.md Step 1 Typography). 1.2+ for most UIs;
+  1.125 works in dense product UIs only when weight and color carry part of the
+  hierarchy
 - **Applies to:** Brand + Product
 
 ### TY-02: Icon Tile Stacked Above Heading
@@ -164,7 +166,7 @@ repeatedly). When a rule has different applicability, the column shows it.
 ### CC-01: AI Color Palette (Purple/Violet + Cyan)
 - **Detection:** `[CLI]` grep for `purple`, `violet`, `indigo`, `cyan` as primary brand
 - **What it is:** Purple/violet gradients and cyan-on-dark
-- **Why slop:** Most recognizable AI-UI palette
+- **Why slop:** Listed in the Impeccable catalog as the default generated-UI palette
 - **Fix:** Pick brand colors with intent. If you need purple/violet, use a
   specific shade with stated reasoning, not the default token range.
 - **Applies to:** Brand + Product
@@ -277,7 +279,9 @@ repeatedly). When a rule has different applicability, the column shows it.
 - **Detection:** `[CLI]` `transition: width` / `transition: height` / `transition: padding`
 - **What it is:** Animating width, height, padding, margin
 - **Why slop:** Layout thrash, janky performance
-- **Fix:** Use `transform` and `opacity`. For height, `grid-template-rows: 0fr -> 1fr`
+- **Fix:** Use `transform` and `opacity`. For a one-off height disclosure,
+  `grid-template-rows: 0fr -> 1fr` is the accepted exception (still a layout
+  animation: fine for an accordion, not for continuous motion)
 - **Applies to:** Brand + Product (performance, always fix)
 
 ### MO-03: Image Hover Transform
@@ -376,7 +380,7 @@ repeatedly). When a rule has different applicability, the column shows it.
 - **Detection:** `[CLI]` `leading-` < 1.3 on body text
 - **What it is:** Line height below 1.3x font size
 - **Why slop:** Multi-line text hard to read
-- **Fix:** 1.5 to 1.7 for body text, 1.1-1.3 for headings only
+- **Fix:** 1.4 to 1.6 for body text, 1.1-1.3 for headings only
 - **Applies to:** Brand + Product
 
 ### GQ-07: Tiny Body Text
@@ -467,4 +471,6 @@ Adaptation for this skill includes:
 - Brand vs Product applicability column
 - Concrete `grep` patterns for Tailwind/Next.js projects
 - Removal of patterns that don't apply to product/web-app context
-- Integration with the skill's existing 8pt grid, 60-30-10, and type scale rules
+- Integration with the skill's spacing scale, 60-30-10, and type scale rules
+- "Why slop" lines restate the catalog's judgment; they are pattern recognition,
+  not measured frequency

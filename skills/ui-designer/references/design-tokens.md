@@ -9,9 +9,9 @@ Read when establishing or auditing a visual design system.
 
 ```css
 --space-0: 0px;
---space-1: 4px;    /* fine-tuning inside components */
---space-2: 8px;    /* tight spacing, icon gaps */
---space-3: 12px;   /* label-to-input gap */
+--space-1: 4px;    /* fine-tuning, label-to-input gap */
+--space-2: 8px;    /* tight spacing, icon gaps, label-to-input gap */
+--space-3: 12px;   /* compact padding, inner gaps */
 --space-4: 16px;   /* default internal padding */
 --space-5: 20px;   /* compact section spacing */
 --space-6: 24px;   /* card padding, form field gaps */
@@ -60,14 +60,20 @@ Read when establishing or auditing a visual design system.
 
 **Dark mode rules:**
 - Elevation = lighter surfaces (not shadows)
-- Desaturate primary colors 10-15%
-- Never pure white text — use #E5E5E5 to #F5F5F5
+- Use lighter, desaturated tones of brand colors (Material's baseline dark
+  theme uses its 200 tones); there is no fixed percentage, check contrast
+- Never pure white text on pure black — use #E5E5E5 to #F5F5F5, or white at
+  ~87% opacity (Material)
 - Borders use semi-transparent white, not solid grays
-- Test at night in a dim room
+- Check it in a dim room as well as a bright one
 
 ---
 
 ## Type Scales
+
+The smallest step of each scale below (11.1px, 10.2px) falls under the 12px
+floor in `interface-checklist.md`. Use it only for text nobody has to read to
+complete a task, or start the small end at 0.75rem (12px).
 
 ### Minor Third (1.200) — Balanced, most web apps
 ```css

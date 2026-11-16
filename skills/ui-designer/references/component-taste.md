@@ -157,7 +157,7 @@ good looks like, and the mistakes AI-generated UI consistently makes.
 
 **Good taste:**
 - Minimal. Just enough text to confirm or communicate.
-- Auto-dismiss for confirmations (3-5 seconds). Persist for errors.
+- Auto-dismiss for confirmations (~5 seconds, paused on hover and focus). Persist for errors.
 - Positioned consistently (top-right or bottom-center, pick one).
 - Don't block page interaction.
 - Semantic styling for success/error/warning/info.

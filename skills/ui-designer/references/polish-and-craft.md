@@ -7,6 +7,10 @@ Read when elevating an interface from functional to polished.
 
 ## The Details That Separate Good from Great
 
+Sections 2, 3, 5 and 8 are **brand context only, once, on purpose**: the AI
+Slop Detector flags them when they show up by reflex (CC-02, CC-03, VD-03).
+Section 6 is safe on sticky navs and overlays, and nowhere else.
+
 ### 1. Staggered Animations
 Multiple elements appearing together should stagger by 50-80ms:
 ```css
@@ -75,10 +79,11 @@ Recessed feel on text fields:
 ```
 
 ### 8. Gradient Text (Sparingly)
-For hero headings only:
+For the hero heading only, in two tones of the brand color. Never the default
+indigo/purple-to-pink range: that is the palette CC-01 flags.
 ```css
 .hero-heading {
-  background: linear-gradient(135deg, #6366F1, #EC4899);
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -94,14 +99,18 @@ For hero headings only:
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);      /* entering */
   --ease-in: cubic-bezier(0.7, 0, 0.84, 0);        /* exiting */
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);   /* repositioning */
-  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);     /* playful bounce */
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);     /* overshoot: brand only, never on dialogs or cards (MO-01) */
 }
 ```
 
 ### Common Transitions
 ```css
-/* Button interactions */
-.btn { transition: all 120ms var(--ease-out); }
+/* Button interactions: name the properties, never `transition: all` */
+.btn {
+  transition: background-color 120ms var(--ease-out),
+              box-shadow 120ms var(--ease-out),
+              transform 120ms var(--ease-out);
+}
 
 /* Card hover */
 .card { transition: transform 200ms var(--ease-out),
@@ -161,11 +170,13 @@ For hero headings only:
 | Typography | Base 16px | Base 16px | Base 16px (scale up headings) |
 
 ### Touch Target Rules
-- Minimum: 44×44px (Apple HIG) / 48×48dp (Material)
-- Comfortable: 48×48px
+- Recommended: 44×44pt (Apple HIG) / 48×48dp (Material)
+- Floor: 24×24px, or enough spacing around a smaller target (WCAG 2.2, SC 2.5.8)
 - Space between targets: at least 8px
-- Bottom of screen = easiest thumb reach
-- Top corners = hardest thumb reach
+- The center of the screen is the easiest area to reach and tap accurately;
+  edges and corners are the hardest (Steven Hoober's observational studies,
+  UXmatters, 2013-2017). The popular "bottom is easiest" thumb-zone map is a
+  simplification: keep frequent actions away from the corners, not just low
 
 ### Viewport Tricks
 ```css
@@ -187,7 +198,7 @@ For hero headings only:
 | Element | Minimum Contrast | Standard |
 |---|---|---|
 | Body text | 4.5:1 | WCAG AA |
-| Large text (18px+ bold, 24px+) | 3:1 | WCAG AA |
+| Large text (24px, or ~18.7px bold: 18pt / 14pt) | 3:1 | WCAG AA |
 | UI components (borders, icons) | 3:1 | WCAG AA |
 | Body text (enhanced) | 7:1 | WCAG AAA |
 

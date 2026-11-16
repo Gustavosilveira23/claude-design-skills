@@ -28,7 +28,7 @@ first, then proceed through the steps below.
 
 Before any visual decision, identify which context you're working in. Brand and
 Product have different tolerances for ornament, type personality, and motion.
-Mismatching context is the #1 cause of "looks off" UI.
+Mismatching context is a common reason UI "looks off": the right technique in the wrong mode.
 
 | Mode | Definition | Defaults |
 |------|-----------|----------|
@@ -79,8 +79,10 @@ create visual chaos. Systematic values create unconscious trust.
 
 ### Spacing: The 8pt Grid
 
-All spacing values must be multiples of 8px (4px for fine-tuning inside
-components). No random values. Ever.
+Default to multiples of 8px, with 4px steps (4, 12, 20) for fine-tuning inside
+components. An off-scale value needs a stated reason. The 8pt grid is a
+convention (Material Design's 8dp grid, spec.fm's "8-Point Grid" guide), not a
+law: what matters is that every value comes from one scale.
 
 **Key scale:** 4, 8, 12, 16, 24, 32, 48, 64, 96, 128px
 
@@ -96,37 +98,45 @@ elements feel disconnected from their containers.
 
 ### Typography: Use a Scale, Not Random Sizes
 
-Generate font sizes from a mathematical ratio. Never pick arbitrary numbers.
+Generate font sizes from a ratio (a modular scale, as Tim Brown described it in
+"More Meaningful Typography", A List Apart, 2011). Never pick arbitrary numbers.
 
 **Recommended ratios:**
-- 1.125 (Major Second): dense UIs, dashboards
+- 1.125 (Major Second): dense UIs, dashboards. At this ratio, weight and color
+  carry part of the hierarchy, not size alone.
 - 1.200 (Minor Third): balanced, most web apps
 - 1.250 (Major Third): marketing, editorial
 - 1.333 (Perfect Fourth): bold, high-impact
 
-**Rules:**
-- Maximum 4 font sizes for most interfaces (6 absolute max)
+**Rules (defaults, not laws):**
+- Start with 4-5 sizes. Past 6, size is usually doing work that weight and
+  color should do.
+- Nothing a user must read goes below 12px; the smallest step of a scale does not
+  excuse it (see interface-checklist.md, "Type details")
 - Line height: 1.4-1.6x for body, 1.1-1.3x for headings
 - As text gets larger, letter-spacing gets TIGHTER (-0.01 to -0.04em)
 - ALL CAPS always needs extra letter-spacing (+0.05 to +0.1em)
-- Maximum 2 typefaces per project
+- Default to 1-2 typefaces per project
 - Weight variation creates hierarchy better than style variation
 - Mixed-size numbers for metrics: keep the number large, set only the unit
   suffix small (e.g., "24.7" at 56px, "%" at 20px)
 
 ### Color: The 60-30-10 Rule
 
-Every interface follows this proportion:
+A starting proportion borrowed from interior design, not a measured rule for
+screens. Its job is to keep the accent rare:
 - **60% dominant** -- background/canvas (neutral)
 - **30% secondary** -- surfaces/cards (step from dominant)
 - **10% accent** -- interactive elements, CTAs (draws the eye)
 
 **Rules:**
-- Maximum 3 hues + neutrals in a product UI
-- Never pure #000000 or #FFFFFF -- too harsh
+- Default to 3 hues + neutrals in a product UI; each extra hue needs a job
+- A pure white (#FFFFFF) background is standard in light mode. In dark mode,
+  avoid pure white on pure black: Material Design's dark theme uses a #121212
+  surface and white text at 87% opacity
 - Each semantic meaning (success, error, warning, info) needs background,
   border, text, and icon color variants
-- Body text contrast: minimum 4.5:1 (WCAG AA)
+- Body text contrast: minimum 4.5:1 (WCAG 2.2, SC 1.4.3)
 - Don't mix warm and cool grays in the same interface
 - Every color must earn its place. If you can't articulate why an element is
   that color, it shouldn't be
@@ -170,13 +180,15 @@ tertiary treatment.
 1. **Primary:** solid fill, high contrast -- the main action
 2. **Secondary:** outline or subtle fill -- supporting actions
 3. **Tertiary/Ghost:** text only or very subtle background -- low priority
-4. **Destructive:** red variant of primary -- delete, remove, cancel
+4. **Destructive:** red variant of primary -- delete, remove, revoke. "Cancel"
+   is not destructive: it is a secondary action
 
 ### Input and Form Design
 
 - Every input needs a visible label (NEVER placeholder-only labels)
-- Top-aligned labels = fastest form completion, best for mobile
-- Label-to-input gap: 4-6px
+- Top-aligned labels by default: easy to scan, and the only layout that fits
+  narrow screens (a small eye-tracking test, Penzo, UXmatters 2006, favored them)
+- Label-to-input gap: 4-8px
 - Between form fields: 16-24px (MUST exceed label-to-input gap)
 - Error messages: red, with icon, replace helper text
 - Heights match button heights in the same size class
@@ -263,19 +275,26 @@ For responsive specifications and mobile patterns, see
 
 ### The Details That Separate Good from Great
 
-1. **Staggered animations:** multiple elements appear with 50-80ms stagger
-2. **Colored shadows:** tint shadows with the element's background color
-3. **Subtle background texture:** barely-visible noise prevents "flat CSS" feel
-4. **Border light effect:** dark themes + 1px rgba(255,255,255,0.06) border
-5. **Micro-gradients on buttons:** top 2% lighter, bottom 2% darker
-6. **Backdrop blur:** `backdrop-filter: blur(12px)` on sticky nav bars
-7. **Inner shadows for inputs:** `inset` shadows create a recessed feel
-8. **Nested border-radius:** concentric -- `outer = inner + padding`, not just
+**Safe in any context:**
+1. **Staggered entrances:** elements that appear together stagger by 50-80ms
+2. **Border light effect:** dark themes + 1px rgba(255,255,255,0.06) border
+3. **Backdrop blur on sticky nav and overlays:** `backdrop-filter: blur(12px)`,
+   only where something real sits behind
+4. **Inner shadows for inputs:** `inset` shadows create a recessed feel
+5. **Nested border-radius:** concentric -- `outer = inner + padding`, not just
    "smaller than parent"
-9. **Consistent icon style:** same stroke weight, corner radius, optical size
-10. **Gradient text (sparingly):** `background-clip: text` for hero text only
+6. **Consistent icon style:** same stroke weight, corner radius, optical size
 
-These ten are the techniques that ADD quality. The details that are simply
+**Brand context only, once, on purpose.** The AI Slop Detector flags each of
+these when it shows up by reflex, so use one where it carries the brand, not
+everywhere:
+- Colored shadows tinted with the element's color (glow on dark is CC-02)
+- Barely-visible noise texture on large surfaces
+- Micro-gradients on a hero button: top a few % lighter, bottom darker
+- Gradient text on the hero headline only (CC-03), in brand tones, never the
+  default purple/indigo range (CC-01)
+
+These are the techniques that ADD quality. The details that are simply
 **missing** are a separate problem, and judgment does not find them -- reading
 the code does. When the task is polish, or when the complaint is "it looks off"
 and you cannot name why, run the relevant sections of
@@ -284,12 +303,14 @@ and you cannot name why, run the relevant sections of
 ### Dark Mode (First-Class, Not an Afterthought)
 
 - Don't invert colors -- dark mode needs its own considered palette
-- Desaturate primary colors (saturated colors vibrate on dark backgrounds)
+- Use lighter, desaturated tones of brand colors: saturated colors vibrate on
+  dark surfaces (Material's baseline dark theme uses its 200 tones)
 - Elevation = lighter surfaces (opposite of light mode shadows)
 - Background hierarchy: darkest furthest back, lighter surfaces forward
-- Text: off-white (#E5E5E5 to #F5F5F5), never pure white
+- Text: off-white (#E5E5E5 to #F5F5F5) or white at ~87% opacity, never pure
+  white on pure black
 - Borders: semi-transparent white rgba(255,255,255,0.1), not solid grays
-- Test at night in a dim room -- that's when dark mode actually matters
+- Check it in a dim room as well as a bright one
 
 ### Motion as Visual Craft
 
@@ -297,8 +318,11 @@ and you cannot name why, run the relevant sections of
 - Ease-in for leaving elements (slow start, fast exit)
 - Ease-in-out for repositioning (smooth throughout)
 - NEVER linear easing except for progress bars
-- Animate ONLY `transform` and `opacity` (GPU-accelerated)
-- Never animate `width`, `height`, `top`, `left` (causes layout reflow)
+- Animate `transform` and `opacity`: the browser can animate them without
+  recalculating layout or repainting (web.dev, "How to create high-performance
+  CSS animations")
+- Never animate `width`, `height`, `top`, `left` (causes layout reflow). The one
+  accepted exception is a one-off disclosure via `grid-template-rows: 0fr -> 1fr`
 - Every interactive element needs ALL states: default, hover, active/pressed,
   focus, disabled, loading, error, success
 
@@ -390,9 +414,9 @@ copy, findings ranked by severity. Do this one always; reach for that one when
 the screen is done or when the user asks for a review.
 
 ### Visual Design Checklist
-- [ ] Spacing consistent and on the 8pt grid?
+- [ ] Spacing consistent and on the project's scale?
 - [ ] Font sizes from a defined type scale (not random)?
-- [ ] Color palette follows 60-30-10?
+- [ ] Accent kept rare (60-30-10 as a starting proportion)?
 - [ ] Clear shadow/elevation hierarchy?
 - [ ] Border-radius values consistent across all components?
 - [ ] Buttons and inputs share the same height scale?
@@ -401,8 +425,9 @@ the screen is done or when the user asks for a review.
 - [ ] Internal spacing < external spacing on all components?
 - [ ] Dark mode considered and functional?
 - [ ] Responsive behavior tested at all breakpoints?
-- [ ] Touch targets at least 44x44px?
-- [ ] Color contrast passes WCAG AA (4.5:1 text, 3:1 large)?
+- [ ] Touch targets 44x44px where the layout allows (Apple HIG 44pt, Material
+      48dp), and never under 24x24px (WCAG 2.2, SC 2.5.8)?
+- [ ] Color contrast passes WCAG AA (4.5:1 text, 3:1 large text and UI parts)?
 
 ### Interface Checklist (mandatory when polish is the task)
 
@@ -420,7 +445,7 @@ not in a screenshot -- an image cannot show you `transition: all`, a missing
 Before presenting any UI, scan against the catalog of AI-generated visual
 anti-patterns in [references/ai-slop-detector.md](references/ai-slop-detector.md).
 
-**Quick check -- the 8 most common slop patterns:**
+**Quick check -- 8 patterns worth checking first:**
 - [ ] No side-tab accent borders on cards (VD-01)
 - [ ] No glassmorphism used as ornament (VD-03)
 - [ ] No gradient text outside of single hero use (CC-03)
@@ -494,10 +519,10 @@ If you catch yourself producing any of these, STOP and revise:
 
 ## NEVER
 
-- **NEVER** use random spacing values -- everything on the 8pt grid
-- **NEVER** pick font sizes arbitrarily -- use a mathematical type scale
-- **NEVER** use pure #000000 or #FFFFFF -- too harsh for any context
-- **NEVER** use more than 3 hues + neutrals in a product UI
+- **NEVER** use spacing values off the project's scale without a stated reason
+- **NEVER** pick font sizes arbitrarily -- use a type scale
+- **NEVER** put pure white text on a pure black background in dark mode
+- **NEVER** add a hue to a product UI without a job for it
 - **NEVER** animate `width`, `height`, `top`, `left` -- use `transform` only
 - **NEVER** use linear easing except for progress bars and shimmer loops
 - **NEVER** make border-radius on children larger than their parent
@@ -519,3 +544,24 @@ If you catch yourself producing any of these, STOP and revise:
   When the design system needs setup or audit, hand off to design-system.
 
 When another skill is more appropriate, say so directly.
+
+---
+
+## Sources and Credits
+
+Most numbers in this skill are conventions and starting points, labelled as
+such. The ones that come from a standard or a study:
+
+- **Spacing:** Material Design's 8dp grid; "8-Point Grid" (spec.fm)
+- **Type scale:** Tim Brown, "More Meaningful Typography", A List Apart, 2011
+- **60-30-10:** interior-design rule of thumb, used here as a starting proportion
+- **Contrast and target size:** WCAG 2.2 (SC 1.4.3, 1.4.11, 2.5.8)
+- **Touch targets:** Apple Human Interface Guidelines (44pt), Material Design (48dp)
+- **Dark theme:** Material Design, "Dark theme" (#121212 surface, 87% white text,
+  200 tones)
+- **Animation performance:** web.dev, "How to create high-performance CSS animations"
+- **Label placement:** M. Penzo, "Label Placement in Forms", UXmatters, 2006
+- **Thumb reach:** Steven Hoober, UXmatters columns, 2013-2017
+- **AI slop patterns:** Impeccable (credited in references/ai-slop-detector.md)
+- **Interface details:** Rauno Freiberg and Jakub Krehel (credited in
+  references/interface-checklist.md)
