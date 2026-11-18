@@ -61,6 +61,8 @@ Makes Claude think about the **human first**. Asks who the user is before buildi
 ### `/ui-designer` -- Visual Craft & Components
 Turns Claude into a visual perfectionist. 8pt spacing grid, mathematical type scales, 60-30-10 color rule, consistent component sizing, dark mode done right, and the Senior Designer Filter that catches amateur mistakes before they ship.
 
+**Full guide**, from the CLEAR audit to the finished screen, with a real session: [How to use the ui-designer skill](https://gustavosilveira.com/skills/ui-designer)
+
 **Includes:**
 - Complete visual foundation system (spacing, typography, color, elevation)
 - Senior Designer Filter -- 7-point checklist run before outputting any UI
